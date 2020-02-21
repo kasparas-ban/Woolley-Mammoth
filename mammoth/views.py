@@ -160,3 +160,35 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
+	
+	
+# -------------------------------------------------------
+# --- Mammoth -------------------------------------------
+# -------------------------------------------------------
+
+def forum(request):
+	return render(request, 'mammoth/forum.html')
+	
+def gallery(request):
+	return render(request, 'mammoth/gallery.html')
+	
+def share_your_pattern(request):
+	return render(request, 'mammoth/share_your_pattern.html')
+	
+def shop(request):
+	return render(request, 'mammoth/shop.html')
+	
+def terms_and_conditions(request):
+	return render(request, 'mammoth/terms_and_conditions.html')
+
+def site_map(request):
+	return render(request, 'mammoth/site_map.html')
+	
+def about_us(request):
+	return render(request, 'mammoth/about_us.html')
+	
+def contact_us(request):
+	return render(request, 'mammoth/contact_us.html')
+	
+def faq(request):
+	return render(request, 'mammoth/faq.html')
