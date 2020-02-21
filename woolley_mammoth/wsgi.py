@@ -1,5 +1,5 @@
 """
-WSGI config for woolly_mammoth project.
+WSGI config for woolley_mammoth project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'woolly_mammoth.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'woolley_mammoth.settings')
 
 application = get_wsgi_application()
