@@ -1,7 +1,7 @@
 from django.urls import path
-from rango import views
+from mammoth import views
 
-app_name = 'rango'
+app_name = 'mammoth'
 
 urlpatterns = [
     path('', views.index, name='index'),

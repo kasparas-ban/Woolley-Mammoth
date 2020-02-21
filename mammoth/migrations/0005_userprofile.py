@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('rango', '0004_auto_20200128_0849'),
+        ('mammoth', '0004_auto_20200128_0849'),
     ]
 
     operations = [

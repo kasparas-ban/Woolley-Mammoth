@@ -16,14 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from rango import views
+from mammoth import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-app_name = 'rango'
+app_name = 'mammoth'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('rango/', include('rango.urls')), 
+    path('mammoth/', include('mammoth.urls')), 
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
