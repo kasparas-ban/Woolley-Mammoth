@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from mammoth.models import Page, Category, UserProfile
+from mammoth.models import Page, Category, UserProfile, Pattern
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=Category.NAME_MAX_LENGTH,
@@ -32,9 +32,14 @@ class PageForm(forms.ModelForm):
 
         return cleaned_data
 
+class PatternForm(forms.ModelForm):
+    title = forms.CharField(max_length=Page.TITLE_MAX_LENGTH, help_text="Enter the title of your pattern.")
+    class Meta:
+        model = Pattern
+        fields = ('title', 'picture',)
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-
     class Meta:
         model = User
         fields = ('username', 'email', 'password',)

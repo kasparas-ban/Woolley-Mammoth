@@ -27,7 +27,7 @@
                 {% else %}
                     <li><a href="{% url 'mammoth:register' %}">Sign Up</a></li>
                 {% endif %}
-            </ul>
+			</ul>
 			
 			<!-- Login Panel -->
 			{% block login_block %}
@@ -48,6 +48,10 @@
 				{% endif %}
 			</div>
 		</div>
+		{% endblock %}
+
+		<!-- Reports the status of a recently done action -->
+		{% block status_block %}
 		{% endblock %}
 
 		<hr />

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from mammoth.models import Category, Page
-from mammoth.forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from mammoth.forms import CategoryForm, PageForm, UserForm, UserProfileForm, PatternForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -173,7 +173,23 @@ def gallery(request):
 	return render(request, 'mammoth/gallery.html')
 	
 def share_your_pattern(request):
-	return render(request, 'mammoth/share_your_pattern.html')
+    if request.method == 'POST':
+        pattern_form = PatternForm(request.POST)
+
+        if pattern_form.is_valid():
+            pattern = pattern_form.save(commit=False)
+
+            if 'picture' in request.FILES:
+                pattern.picture = request.FILES['picture']
+
+            pattern.save()
+            return render(request, 'mammoth/index.html', context={'pattern_uploaded':True})
+        else:
+            print(pattern_form.errors)
+    else:
+        pattern_form = PatternForm()
+
+    return render(request, 'mammoth/share_your_pattern.html', context={'pattern_form':pattern_form})
 	
 def shop(request):
 	return render(request, 'mammoth/shop.html')
