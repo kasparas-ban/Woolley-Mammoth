@@ -10,5 +10,14 @@
 {% block body_block %}
 
     <h2>Share Your Pattern</h2>
+    {% if user.is_authenticated %}
+        <form action="/action_page.php">
+            <label for="img">Upload your pattern:</label>
+            <input type="file" id="img" name="img" accept="image/*"> <br />
+            <input type="submit">
+        </form>
+    {% else %}
+        Login to share your pattern.
+    {% endif %}
 
 {% endblock %}

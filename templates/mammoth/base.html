@@ -23,13 +23,14 @@
 				<li><a href="{% url 'mammoth:shop' %}">Shop</a></li>
 				
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'mammoth:sign_out' %}">Sign Out</a></li>
+                    <li><a href="{% url 'mammoth:logout' %}">Sign Out</a></li>
                 {% else %}
                     <li><a href="{% url 'mammoth:register' %}">Sign Up</a></li>
                 {% endif %}
             </ul>
 			
 			<!-- Login Panel -->
+			{% block login_block %}
 			<div>
 				{% if user.is_authenticated %}
 					Welcome, {{ user.username }}! <br />
@@ -46,7 +47,10 @@
 					</form>
 				{% endif %}
 			</div>
-        </div>
+		</div>
+		{% endblock %}
+
+		<hr />
 	
         <div>
 			{% block body_block %}
