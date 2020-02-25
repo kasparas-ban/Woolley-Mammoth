@@ -10,5 +10,19 @@
 {% block body_block %}
 
     <h2>Share Your Pattern</h2>
+    {% if user.is_authenticated %}
+        <form id="pattern_form" method="post" action="{% url 'mammoth:share_your_pattern' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ pattern_form.as_p }}
+
+            <!--
+            <label for="img">Upload your pattern:</label>
+            <input type="file" id="img" name="img" accept="image/*"> <br />
+            -->
+            <input type="submit">
+        </form>
+    {% else %}
+        Login to share your pattern.
+    {% endif %}
 
 {% endblock %}

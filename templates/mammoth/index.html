@@ -7,6 +7,12 @@
     Homepage
 {% endblock %}
 
+{% block status_block %}
+    {% if pattern_uploaded %}
+        <strong>Your pattern was successfully uploaded.</strong>
+    {% endif %}
+{% endblock %}
+
 {% block body_block %}
 
     <h1>Woolly Mammoth</h1>

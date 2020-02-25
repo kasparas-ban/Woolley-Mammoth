@@ -27,9 +27,10 @@
                 {% else %}
                     <li><a href="{% url 'mammoth:register' %}">Sign Up</a></li>
                 {% endif %}
-            </ul>
+			</ul>
 			
 			<!-- Login Panel -->
+			{% block login_block %}
 			<div>
 				{% if user.is_authenticated %}
 					Welcome, {{ user.username }}! <br />
@@ -46,7 +47,14 @@
 					</form>
 				{% endif %}
 			</div>
-        </div>
+		</div>
+		{% endblock %}
+
+		<!-- Reports the status of a recently done action -->
+		{% block status_block %}
+		{% endblock %}
+
+		<hr />
 	
         <div>
 			{% block body_block %}

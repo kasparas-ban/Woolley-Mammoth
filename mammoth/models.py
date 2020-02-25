@@ -33,18 +33,19 @@ class Page(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):
         return self.user.username
 
-# class User(models.Model):
-#     NAME_MAX_LENGTH = 128
-#     username = models.CharField(max_length = NAME_MAX_LENGTH)
-#     password = models.CharField(max_length = 16)
-#     email = models.EmailField()
-#     # website
-#     # save the user icon in this folder
-#     icon = models.ImageField(upload_to = "profile_images/icons")
+
+class Pattern(models.Model):
+    TITLE_MAX_LENGTH = 128
+
+    title = models.CharField(max_length=TITLE_MAX_LENGTH)
+    picture = models.ImageField(upload_to='pattern_images', blank=True)
+    #author = models.CharField(max_length=TITLE_MAX_LENGTH)
+
+    def __str__(self):
+        return self.title
 
