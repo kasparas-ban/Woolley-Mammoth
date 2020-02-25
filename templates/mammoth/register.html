@@ -1,5 +1,7 @@
 {% extends 'mammoth/base.html' %}
 {% load staticfiles %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 {% block title_block %}
     Register
@@ -20,5 +22,8 @@ Rango says: <strong>register here!</strong><br />
     {{ profile_form.as_p }}
     <input type="submit" name="submit" value="Register" />
 </form>
+    <button>
+        <a href="{% provider_login_url "facebook" method="oauth2" %}">Login with Facebook</a>
+    </button>
 {% endif %}
 {% endblock %}

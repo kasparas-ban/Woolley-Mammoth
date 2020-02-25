@@ -38,3 +38,13 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+# class User(models.Model):
+#     NAME_MAX_LENGTH = 128
+#     username = models.CharField(max_length = NAME_MAX_LENGTH)
+#     password = models.CharField(max_length = 16)
+#     email = models.EmailField()
+#     # website
+#     # save the user icon in this folder
+#     icon = models.ImageField(upload_to = "profile_images/icons")
+
