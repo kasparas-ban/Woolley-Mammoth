@@ -11,4 +11,11 @@
 
     <h2>Gallery</h2>
 
+    {% for pattern in all_patterns %}
+        <li>
+            {{ pattern.title }}
+            <img src="{{ pattern.picture.url }}">
+        </li>
+    {% endfor %}
+
 {% endblock %}
