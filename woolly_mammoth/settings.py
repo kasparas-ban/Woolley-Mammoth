@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'mammoth',
+    'social_django',
 
     #allauth
     'allauth',
@@ -52,6 +53,14 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '698380776361-hjpbs5h2esqnbe2iq3bflon337tsieoo.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jOJMA_S9pCBt4UZLpNmIV1uE'
+# AIzaSyBwBB2MQp92Jnym2kh50dL_86UrAjhRi6A
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,3 +150,8 @@ SITE_ID = 1
 
 # this is for redirect url after use social login: home page here
 LOGIN_REDIRECT_URL = "/" 
+
+# for google:
+LOGIN_URL = '/auth/login/google-oauth2/'
+LOGOUT_REDIRECT_URL = '/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
