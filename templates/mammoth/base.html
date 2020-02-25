@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load mammoth_template_tags %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 <html>
     <head>
@@ -45,6 +47,9 @@
 						<br />
 						<input type="submit" value="submit" />
 					</form>
+					<button>
+						<a href="{% provider_login_url "facebook" method="oauth2" %}">Login with Facebook</a>
+					</button>
 				{% endif %}
 			</div>
 		</div>
