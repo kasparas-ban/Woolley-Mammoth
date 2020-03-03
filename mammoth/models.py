@@ -47,8 +47,13 @@ class Pattern(models.Model):
     TITLE_MAX_LENGTH = 128
 
     title = models.CharField(max_length=TITLE_MAX_LENGTH)
-    picture = models.ImageField(upload_to='pattern_images', blank=True)
+    #slug = models.SlugField(blank=True)
+    picture = models.ImageField(upload_to='pattern_images')
     #author = models.CharField(max_length=TITLE_MAX_LENGTH)
+
+    def save(self, *args, **kwargs):
+        #self.slug = slugify(self.title)
+        super(Pattern, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

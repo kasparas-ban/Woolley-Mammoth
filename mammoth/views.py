@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from mammoth.models import Category, Page , Comment
+from mammoth.models import Category, Page , Comment, Pattern
 from mammoth.forms import CategoryForm, PageForm, UserForm, UserProfileForm, PatternForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -175,15 +175,13 @@ def forum(request):
 	return render(request, 'mammoth/forum.html')
 	
 def gallery(request):
-	return render(request, 'mammoth/gallery.html')
-	
+    return render(request, 'mammoth/gallery.html', context={'all_patterns':Pattern.objects.all()})
+
 def share_your_pattern(request):
     if request.method == 'POST':
         pattern_form = PatternForm(request.POST)
 
         if pattern_form.is_valid():
-            pattern = pattern_form.save(commit=False)
-
             if 'picture' in request.FILES:
                 pattern.picture = request.FILES['picture']
 
