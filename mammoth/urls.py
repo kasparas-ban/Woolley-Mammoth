@@ -16,7 +16,9 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
   
     
-    
+    #for comment url
+    path('comment/',views.submit_comment,name='comment'),
+
     # Header
     path('forum/', views.forum, name='forum'),
     path('gallery/', views.gallery, name='gallery'),

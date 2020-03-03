@@ -57,9 +57,24 @@ INSTALLED_APPS = [
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
 )
+# ==========================================================================
+# ===========================Social login Key===============================
+# ==========================================================================
+# for facebook
+SOCIAL_AUTH_FACEBOOK_KEY = '650900482405385'
+SOCIAL_AUTH_FACEBOOK_SECRET = '91fd3a49b360da386c1e0f35cd773bb4'
+# for google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '698380776361-hjpbs5h2esqnbe2iq3bflon337tsieoo.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jOJMA_S9pCBt4UZLpNmIV1uE'
+# for twitter
+SOCIAL_AUTH_TWITTER_KEY = 'vRKIbjNMX9GtQhDVx2VnOyY3b'
+SOCIAL_AUTH_TWITTER_SECRET = 'PKTsMUT2P1jmU0VQ2MfOKHqTe1j4pwc1NmzKFs85X8FeS0m10l'
+
 # AIzaSyBwBB2MQp92Jnym2kh50dL_86UrAjhRi6A
 
 MIDDLEWARE = [
@@ -70,6 +85,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'woolly_mammoth.urls'
@@ -86,6 +102,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+
+                # for social login
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },

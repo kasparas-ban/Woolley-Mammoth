@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from mammoth.models import Category, Page
+from mammoth.models import Category, Page , Comment
 from mammoth.forms import CategoryForm, PageForm, UserForm, UserProfileForm, PatternForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.contrib.contenttypes.models import ContentType
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -124,7 +125,11 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('mammoth:index'))
+                # Here: we can redirect the user to the page where they used to login
+                # and if it cannot get previous page, it will redirect to mammoth:index
+                refer = request.META.get("HTTP_REFERER","mammoth:index") 
+                # return redirect(reverse('mammoth:index'))
+                return redirect(refer)  
             else:
                 return HttpResponse("Your Rango account is disabled.")
         else:
@@ -208,3 +213,34 @@ def contact_us(request):
 	
 def faq(request):
 	return render(request, 'mammoth/faq.html')
+
+#==============================================================
+#====================== Comment function ======================
+#==============================================================
+def submit_comment(request):
+    user = request.user
+    text = request.POST.get('text','').strip() #''here means if there is nothing get from request, it will return ''
+    content_type = request.POST.get('content_type','')
+    object_id = int(request.POST.get('object_id',''))
+    model_class = ContentType.objects.get(model = content_type).model_class()
+    model_obj = model_class.objects.get(pk = object_id)
+    
+    #create a comment model
+    comment = Comment() 
+    comment.user = user
+    comment.text = text
+    comment.comment_object
+    comment.content_object = model_obj
+    comment.save()
+
+    # Here: we can redirect the user to the page where they make comment
+    # and if it cannot get previous page, it will redirect to mammoth:index
+    refer = request.META.get("HTTP_REFERER","mammoth:index") 
+    # return redirect(reverse('mammoth:index'))
+    return redirect(refer)  
+
+    #for some special models (twittes? blog?) which might have comments for that model
+    # , use this to show its comment
+    # get all comment model->
+    #   comments = Comment.objects.filter(content_type = [type_of_object], object_id = [pk_of_object] )
+    # and then return it to template page
