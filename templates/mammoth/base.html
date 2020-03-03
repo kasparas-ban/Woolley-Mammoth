@@ -5,60 +5,71 @@
 
 <html>
     <head>
+         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'' %}" />
         <title>
-            WM -
+            Woolly Mammoth -
             {% block title_block %}
-                This is a subsection.
+                Lets cause a hooley and get woolly!
             {% endblock %}
         </title>
     </head>
 	
     <body>
-		<!-- HEADER -->
-		<div>
-			<!-- Menu Panel -->
-            <ul>
-				<li><a href="{% url 'mammoth:forum' %}">Forum</a></li>
-				<li><a href="{% url 'mammoth:gallery' %}">Gallery</a></li>
-				<li><a href="{% url 'mammoth:share_your_pattern' %}">Share Your Pattern</a></li>
-				<li><a href="{% url 'mammoth:shop' %}">Shop</a></li>
-				
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'mammoth:logout' %}">Sign Out</a></li>
-                {% else %}
-                    <li><a href="{% url 'mammoth:register' %}">Sign Up</a></li>
-                {% endif %}
-			</ul>
-			
-			<!-- Login Panel -->
-			{% block login_block %}
-			<div>
-				{% if user.is_authenticated %}
-					Welcome, {{ user.username }}! <br />
+        <div class="header">
+    <div class="inner_header">
+        <div class="logo_container">
+            <h1>Woolly<span>Mammoth</span></h1>
+        </div>
+        <ul class="navigation">
+            <a><li href="{% url 'mammoth:forum' %}">Stitch & bitch</li></a>
+            <a><li href="{% url 'mammoth:gallery' %}">Gallery</li></a>
+            <a><li href="{% url 'mammoth:share_your_pattern' %}">Share Your Pattern</li></a>
+            <a><li href="{% url 'mammoth:shop' %}">Knit Kit</li></a>
+            {% if user.is_authenticated %}
+            <a><li href="{% url 'mammoth:logout' %}">Sign Out</li></a> 
+             {% else %}
+            <a><li href="{% url 'mammoth:register' %}">Sign Up</li></a>
+             {% endif %}
+        </ul> 
+   </div>
+  
+</div>    
+       {% block login_block %}
+          <div class="login"> 
+              {% if user.is_authenticated %}
+ 					Welcome, {{ user.username }}! <br />
 				{% else %}
-					Hey there visitor! <br />
-					Login to Woolly Mammoth <br />
-					<form id="login_form" method="post" action="{% url 'mammoth:login' %}">
-						{% csrf_token %}
-						Username: <input type="text" name="username" value="" size="50" />
-						<br />
-						Password: <input type="password" name="password" value="" size="50" />
-						<br />
+					Hey there visitor!
+             <button style="padding: 0 15px; float: right;">
+						<a href="{% provider_login_url "facebook" method="oauth2" %}">Login with Facebook</a>
+					</button>
+              <button style="padding: 0 15px; float: right;">
+						<a href="{% url 'social:begin' 'google-oauth2' %}"">Login with Google</a>
+					</button>
+                                                                           
+					<form style="padding: 0 15px; float: right;" id="login_form" method="post" action="{% url 'mammoth:login' %}">
+						{% csrf_token %}-->
+						<strong>Login</strong> Username: <input type="text" name="username" value="" size="15" />
+						Password: <input type="password" name="password" value="" size="15" />
 						<input type="submit" value="submit" />
-					</form>
+					</form> 
+
 					<button>
 						<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
 					</button>
 					<button>
 						<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google"></a>
 					</button>
+					
 						<button>
 					 	<a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
 						 </button>
+
 				{% endif %}
 			</div>
-		</div>
-		{% endblock %}
+        {% endblock %}
+        
+		
 
 		<!-- Reports the status of a recently done action -->
 		{% block status_block %}
@@ -66,7 +77,7 @@
 
 		<hr />
 	
-        <div>
+        <div class="main">
 			{% block body_block %}
 				This is body_block's default content.
 			{% endblock %}
@@ -74,15 +85,18 @@
 		
         <hr />
 		
-		<!-- FOOTER -->
-        <div>
+		  <div class="footer">
+            <div class="inner_footer">
+        <div class="navigation">
             <ul>
-				<li><a href="{% url 'mammoth:terms_and_conditions' %}">Terms & Conditions</a></li>
-				<li><a href="{% url 'mammoth:site_map' %}">Site Map</a></li>
-                <li><a href="{% url 'mammoth:about_us' %}">About Us</a></li>
-                <li><a href="{% url 'mammoth:contact_us' %}">Contact Us</a></li>
-				<li><a href="{% url 'mammoth:faq' %}">FAQ</a></li>
+				<a><li href="{% url 'mammoth:terms_and_conditions' %}">Terms & Conditions</li></a>
+				<a><li href="{% url 'mammoth:site_map' %}">Site Map</li></a>
+                <a><li href="{% url 'mammoth:about_us' %}">About Us</li></a>
+                <a><li href="{% url 'mammoth:contact_us' %}">Contact Us</li></a>
+				<a><li href="{% url 'mammoth:faq' %}">FAQ</li></a>
             </ul>
+        </div>
+                </div>
         </div>
 		
     </body>
