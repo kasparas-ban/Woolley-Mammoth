@@ -180,21 +180,27 @@ def gallery(request):
 def share_your_pattern(request):
     if request.method == 'POST':
         pattern_form = PatternForm(request.POST, request.FILES)
-        
+
         if pattern_form.is_valid():
             if 'picture' in request.FILES:
-
-                pattern_form.picture = request.FILES['picture']
-
-                pattern_form.save()
+                # user = request.user
+                # pattern_form.picture = request.FILES['picture']
+                # pattern_form.author = user
+                # pattern_form.save()
+                pattern = Pattern()
+                pattern.title = pattern_form.cleaned_data['title']
+                pattern.picture = request.FILES['picture']
+                pattern.description = pattern_form.cleaned_data['description']
+                pattern.author = request.user
+                pattern.save()
 
             return render(request, 'mammoth/index.html', context={'pattern_uploaded':True})
         else:
             print(pattern_form.errors)
     else:
         pattern_form = PatternForm()
-
-    return render(request, 'mammoth/share_your_pattern.html', context={'pattern_form':pattern_form})
+        user = request.user
+    return render(request, 'mammoth/share_your_pattern.html', context={'pattern_form':pattern_form,'user':user})
 	
 def shop(request):
 	return render(request, 'mammoth/shop.html')

@@ -56,7 +56,11 @@ class Pattern(models.Model):
     #author = models.CharField(max_length=TITLE_MAX_LENGTH)
     description = models.TextField(default=" ")
 
+    # change foreign key to OneToOneField
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    
+
     def save(self, *args, **kwargs):
         #self.slug = slugify(self.title)
         super(Pattern, self).save(*args, **kwargs)
@@ -81,3 +85,9 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     class Meta:
         ordering = ['-comment_time'] # lasted comment will be the first
+
+#=================================================
+#================= rate model=====================
+#=================================================
+class Rate(models.Model):
+    rate_score = models.FloatField()

@@ -15,8 +15,8 @@
     <form action="{% url 'mammoth:comment' %}" method="POST">
         {% csrf_token %}
         <textarea name="" id="" cols="30" rows="10"></textarea>
-        <input type="hidden" name="object_id" value="{{shop.pk}}">
-        <input type="hidden" name="content_type" value = "shop">
+        <input type="hidden" name="object_id" value="{{pattern.pk}}">
+        <input type="hidden" name="content_type" value = "pattern">
         <input type="submit" value="submit">
     </form>
 
