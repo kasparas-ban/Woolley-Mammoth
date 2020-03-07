@@ -10,5 +10,47 @@
 {% block body_block %}
 
     <h2>FAQ</h2>
+<br />
+<button class="accordion">Is there a membership fee?</button>
+<div class="panel">
+  <p>We do not charge a membership fee, it is purely for the love of knitting. We would love to see your patterns and hear your opinion on existing ones. Cause a hooley!</p>
+</div>
+
+<button class="accordion">How long would it take me to knit one of the patterns available.</button>
+<div class="panel">
+  <p>It really depends on which pattern you choose and your knitting ability. Current members have very kindly left feedback on most patterns which should help you get an indication of the complexity of each pattern.</p>
+</div>
+
+<button class="accordion">Can anyone become a member?</button>
+<div class="panel">
+  <p>Yes! Everyone is welcome, whether you are a novice or an expert. There is something for everyone. We are a friendly bunch of mammoths and remind everyone to be respectful. Please don't stich and bitch!</p>
+</div>
+
+<button class="accordion">As a beginner, what do I need?</button>
+<div class="panel">
+  <p>We would suggest you start with a cheap starter pack. If you check out our <a href="{% url 'mammoth:knit_kit' %}">Knit Kit</a> page there are links to many reputable companies where you can purchase some beginner kits.</p>
+</div>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
+
+
+
+
+
 
 {% endblock %}

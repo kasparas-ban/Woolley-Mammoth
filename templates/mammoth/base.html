@@ -25,11 +25,17 @@
                     <a href="{% url 'mammoth:index' %}"><h1>Woolly<span>Mammoth</span></h1></a>
         		</div>
         		<ul class="navigation">
+<<<<<<< HEAD
+            		<!--<a href="{% url 'mammoth:forum' %}"><li>Stitch & bitch</li></a>-->
+                     <a href="{% url 'mammoth:about_us' %}"><li>About Us</li></a>
+=======
             		<!--<a href="{% url 'mammoth:forum' %}"><li>Stitch & bitch</li></a>
 <a href="{% url 'mammoth:shop' %}"><li>Knit Kit</li></a>-->
-                     <a href="{% url 'mammoth:about_us' %}"><li>About Us</li></a>
+					<a href="{% url 'mammoth:about_us' %}"><li>About Us</li></a>
+>>>>>>> c79772c88b1f77bcdcff43456010a23cc0d74cc9
             		<a href="{% url 'mammoth:gallery' %}"><li>Gallery</li></a>
             		<a href="{% url 'mammoth:contact_us' %}"><li>Contact Us</li></a>
+                    <a href="{% url 'mammoth:knit_kit' %}"><li>Knit Kit</li></a>
             		
             		{% if user.is_authenticated %}
                     <a href="{% url 'mammoth:share_your_pattern' %}"><li>Share Your Pattern</li></a>
@@ -96,7 +102,6 @@
 				<a href="{% url 'mammoth:terms_and_conditions' %}"><li>Terms & Conditions</li></a>
 				<a href="{% url 'mammoth:site_map' %}"><li>Site Map</li></a>
 				<a href="{% url 'mammoth:faq' %}"><li>FAQ</li></a>
-				<a href="{% url 'mammoth:knit_kit' %}"><li>Knit Kit</li></a>
             </ul>
         </div>
                 </div>
