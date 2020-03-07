@@ -5,7 +5,10 @@
 
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+		{% block style_block %}
+		{% endblock %}
+
         <title>
             Woolly Mammoth -
             {% block title_block %}
@@ -93,6 +96,7 @@
 				<a href="{% url 'mammoth:terms_and_conditions' %}"><li>Terms & Conditions</li></a>
 				<a href="{% url 'mammoth:site_map' %}"><li>Site Map</li></a>
 				<a href="{% url 'mammoth:faq' %}"><li>FAQ</li></a>
+				<a href="{% url 'mammoth:knit_kit' %}"><li>Knit Kit</li></a>
             </ul>
         </div>
                 </div>

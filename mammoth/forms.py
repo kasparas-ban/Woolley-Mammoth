@@ -33,7 +33,7 @@ class PageForm(forms.ModelForm):
         return cleaned_data
 
 class PatternForm(forms.ModelForm):
-    title = forms.CharField(max_length=Page.TITLE_MAX_LENGTH, help_text="Enter the title of your pattern.")
+    title = forms.CharField(max_length=Pattern.TITLE_MAX_LENGTH)
     class Meta:
         model = Pattern
         fields = ('title', 'picture',)
