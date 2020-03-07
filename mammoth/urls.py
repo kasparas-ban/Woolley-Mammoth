@@ -30,5 +30,6 @@ urlpatterns = [
     path('about_us/', views.about_us, name='about_us'),
     path('contact_us/', views.contact_us, name='contact_us'),
     path('faq/', views.faq, name='faq'),
+    path('knit_kit/', views.knit_kit, name='knit_kit'),
     
 ]

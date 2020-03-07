@@ -214,6 +214,9 @@ def contact_us(request):
 def faq(request):
 	return render(request, 'mammoth/faq.html')
 
+def knit_kit(request):
+    return render(request, 'mammoth/knit_kit.html')
+
 #==============================================================
 #====================== Comment function ======================
 #==============================================================
