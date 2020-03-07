@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+{% extends 'mammoth/base.html' %}
+{% load staticfiles %}
+
+{% block style_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pattern_style.css' %}" />
+{% endblock %}
+
+{% block title_block %}
+    {{ pattern_title }}
+{% endblock %}
+
+{% block body_block %}
+
+    <h2>{{ pattern_title }}</h2>
+    <div class = "pattern">
+        <img src="{{ pattern.picture.url }}">
+    </div>
+
+{% endblock %}

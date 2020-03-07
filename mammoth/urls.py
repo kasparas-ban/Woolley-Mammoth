@@ -10,6 +10,10 @@ urlpatterns = [
         views.show_category, name='show_category'),
     path('add_category/', views.add_category, name='add_category'),
     path('category/<slug:category_name_slug>/add_page/', views.add_page, name='add_page'),
+
+    path('gallery/<slug:pattern_title_slug>/', views.pattern, name='pattern'),
+
+    # Registration
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('restricted/', views.restricted, name='restricted'),
