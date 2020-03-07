@@ -175,7 +175,11 @@ def pattern(request, pattern_title_slug):
     context_dict = {}
     try:
         pattern = Pattern.objects.get(slug=pattern_title_slug)
+        # get the comment
+        comments = Comment.objects.filter(object_id = pattern.pk )
+
         context_dict['pattern'] = pattern
+        context_dict['comments'] = comments
     except Pattern.DoesNotExist:
         context_dict['pattern'] = None
 
@@ -255,11 +259,9 @@ def submit_comment(request):
     # Here: we can redirect the user to the page where they make comment
     # and if it cannot get previous page, it will redirect to mammoth:index
     refer = request.META.get("HTTP_REFERER","mammoth:index") 
-    # return redirect(reverse('mammoth:index'))
-    return redirect(refer)  
-
-    #for some special models (twittes? blog?) which might have comments for that model
+        #for some special models (twittes? blog?) which might have comments for that model
     # , use this to show its comment
     # get all comment model->
-    #   comments = Comment.objects.filter(content_type = [type_of_object], object_id = [pk_of_object] )
     # and then return it to template page
+    return redirect(refer)  
+

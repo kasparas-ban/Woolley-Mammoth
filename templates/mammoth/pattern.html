@@ -17,5 +17,25 @@
     <div class = "pattern">
         <img src="{{ pattern.picture.url }}">
     </div>
+    <h3>COMMENT Submit</h3>
+    <form action="{% url 'mammoth:comment' %}" method="POST">
+        {% csrf_token %}
+        <textarea name="text" id="" cols="30" rows="10"></textarea>
+        <input type="hidden" name="object_id" value="{{pattern.pk}}">
+        <input type="hidden" name="content_type" value = "pattern">
+        <input type="submit" value="submit">
+    </form>
 
+    <!-- here will display the comments list for this special type / might be changed with different type of pages-->
+    <h3>Comment List</h3>
+        
+        {% for comment in comments %}
+            <div>{{comment.user.username}}</div>
+            <div>{{comment.comment_time|date:"Y-m-d H:n:s"}}</div>
+            <div>{{comment.text}}</div>
+
+
+            {% empty %}
+            <div>There is no comment</div>
+        {% endfor %}
 {% endblock %}
