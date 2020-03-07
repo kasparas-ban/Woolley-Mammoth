@@ -2,14 +2,16 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    text-decoration: none;
+    text-decoration: none;    
 }
 
 .header{
     width: 100%;
     height: 10%;
     display: block;
+    color: antiquewhite;
     background-color: #c1a188;
+    overflow:auto;
     }
 
 .inner_header{
@@ -23,6 +25,7 @@
     height: 100%;
     display: table;
     float: left;
+   
 }
 
 .logo_container h1{
@@ -36,8 +39,32 @@
 }
 
 .logo_container h1 span{
+    color: #8b450d;
     font-weight: 1000;
 }
+
+.logo_container a h1 span:link{
+   color: antiquewhite;
+} 
+
+.logo_container a h1 span:visited{
+  color: antiquewhite;
+}
+.logo_container a h1 span:hover{
+    color: antiquewhite;
+}
+
+.logo_container a:link{
+   color: antiquewhite;
+} 
+
+.logo_container a:visited{
+    color: antiquewhite;
+}
+.logo_container a:hover{
+   color: #8b450d;
+}
+
 
 .navigation{
     float: right;
@@ -45,10 +72,20 @@
 }
 
 .navigation a{
+    color: #8b450d;
     height: 100%;
     display: table;
     float: left;
-    padding: 0px 20px;
+    padding: 10px 20px;
+   
+}
+
+.navigation a:link{
+    color: #8b450d;
+} 
+
+.navigation a li:hover{
+  color: #8b450d;
 }
 
 .navigation a:last-child{
@@ -59,11 +96,11 @@
     display: table-cell;
     vertical-align: middle;
     height: 100%;
-    color: 8b450d;
+    color: antiquewhite;
     font-family:cursive;
-    font-size: 16px;
-    
+    font-size: 16px; 
 }
+
 
 .login{
     padding-left: 20px;
@@ -72,27 +109,29 @@
     padding-bottom: 10px;
     background-color: antiquewhite;
     font-family: cursive;
-    color: 8b450d;
+    color: #8b450d;
     height: 5%;
     display: table;
     width: 97%;
 }
 
 .main{
-    color: 8b450d;
+    color: #8b450d;
     font-family:cursive;
-    padding: 5%;
+    padding: 2%;
     height: 60%;
 }
+
 
 .footer{
     position: absolute;
     bottom: 10px;
     width: 100%;
-    height: 5%;
+    height: 2%;
     display: block;
     background-color: #c1a188;
     clear: both;
+    padding-bottom: 2%;
 }
 
 .inner_footer{
@@ -100,4 +139,8 @@
     height: 100%;
     display: block;
     margin: 0 auto;
+}
+
+.inner_footer a li:hover{
+    color: #8b450d;
 }
