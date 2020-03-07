@@ -179,15 +179,15 @@ def gallery(request):
 
 def share_your_pattern(request):
     if request.method == 'POST':
-        pattern_form = PatternForm(request.POST)
-
+        pattern_form = PatternForm(request.POST, request.FILES)
+        
         if pattern_form.is_valid():
             if 'picture' in request.FILES:
-                pattern = Pattern()
-                pattern.picture = request.FILES['picture']
 
-                pattern.save()
-                print("successed")
+                pattern_form.picture = request.FILES['picture']
+
+                pattern_form.save()
+
             return render(request, 'mammoth/index.html', context={'pattern_uploaded':True})
         else:
             print(pattern_form.errors)

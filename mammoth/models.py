@@ -43,12 +43,14 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+
 #=================================================
 #=================Pattern model===================
 #=================================================
 class Pattern(models.Model):
     TITLE_MAX_LENGTH = 128
     title = models.CharField(max_length=TITLE_MAX_LENGTH)
+
     #slug = models.SlugField(blank=True)
     picture = models.ImageField(upload_to='pattern_images', blank=True)
     #author = models.CharField(max_length=TITLE_MAX_LENGTH)
