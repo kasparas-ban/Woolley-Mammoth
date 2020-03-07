@@ -171,6 +171,16 @@ def visitor_cookie_handler(request):
 # --- Mammoth -------------------------------------------
 # -------------------------------------------------------
 
+def pattern(request, pattern_title_slug):
+    context_dict = {}
+    try:
+        pattern = Pattern.objects.get(slug=pattern_title_slug)
+        context_dict['pattern'] = pattern
+    except Pattern.DoesNotExist:
+        context_dict['pattern'] = None
+
+    return render(request, 'mammoth/pattern.html', context_dict)
+
 def forum(request):
 	return render(request, 'mammoth/forum.html')
 	

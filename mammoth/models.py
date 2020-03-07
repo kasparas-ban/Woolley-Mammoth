@@ -49,10 +49,11 @@ class UserProfile(models.Model):
 #=================================================
 class Pattern(models.Model):
     TITLE_MAX_LENGTH = 128
-    title = models.CharField(max_length=TITLE_MAX_LENGTH)
 
-    #slug = models.SlugField(blank=True)
-    picture = models.ImageField(upload_to='pattern_images', blank=True)
+    title = models.CharField(max_length=TITLE_MAX_LENGTH, default='pattern_name')
+    slug = models.SlugField(blank=True)
+    picture = models.ImageField(upload_to='pattern_images')
+
     #author = models.CharField(max_length=TITLE_MAX_LENGTH)
     description = models.TextField(default=" ")
 
@@ -62,7 +63,7 @@ class Pattern(models.Model):
     
 
     def save(self, *args, **kwargs):
-        #self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         super(Pattern, self).save(*args, **kwargs)
 
     def __str__(self):
