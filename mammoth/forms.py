@@ -33,10 +33,12 @@ class PageForm(forms.ModelForm):
         return cleaned_data
 
 class PatternForm(forms.ModelForm):
+
     title = forms.CharField(max_length=Pattern.TITLE_MAX_LENGTH)
+
     class Meta:
         model = Pattern
-        fields = ('title', 'picture',)
+        fields = ('title', 'picture','description',)
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

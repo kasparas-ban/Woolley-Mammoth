@@ -175,7 +175,11 @@ def pattern(request, pattern_title_slug):
     context_dict = {}
     try:
         pattern = Pattern.objects.get(slug=pattern_title_slug)
+        # get the comment
+        comments = Comment.objects.filter(object_id = pattern.pk )
+
         context_dict['pattern'] = pattern
+        context_dict['comments'] = comments
     except Pattern.DoesNotExist:
         context_dict['pattern'] = None
 
@@ -190,18 +194,27 @@ def gallery(request):
 def share_your_pattern(request):
     if request.method == 'POST':
         pattern_form = PatternForm(request.POST, request.FILES)
+
         if pattern_form.is_valid():
             if 'picture' in request.FILES:
-                pattern_form.picture = request.FILES['picture']
+                # user = request.user
+                # pattern_form.picture = request.FILES['picture']
+                # pattern_form.author = user
+                # pattern_form.save()
+                pattern = Pattern()
+                pattern.title = pattern_form.cleaned_data['title']
+                pattern.picture = request.FILES['picture']
+                pattern.description = pattern_form.cleaned_data['description']
+                pattern.author = request.user
+                pattern.save()
 
-            pattern_form.save()
             return render(request, 'mammoth/index.html', context={'pattern_uploaded':True})
         else:
             print(pattern_form.errors)
     else:
         pattern_form = PatternForm()
-
-    return render(request, 'mammoth/share_your_pattern.html', context={'pattern_form':pattern_form})
+        user = request.user
+    return render(request, 'mammoth/share_your_pattern.html', context={'pattern_form':pattern_form,'user':user})
 	
 def shop(request):
 	return render(request, 'mammoth/shop.html')
@@ -239,18 +252,16 @@ def submit_comment(request):
     comment = Comment() 
     comment.user = user
     comment.text = text
-    comment.comment_object
+    comment.comment_type = model_class
     comment.content_object = model_obj
     comment.save()
 
     # Here: we can redirect the user to the page where they make comment
     # and if it cannot get previous page, it will redirect to mammoth:index
     refer = request.META.get("HTTP_REFERER","mammoth:index") 
-    # return redirect(reverse('mammoth:index'))
-    return redirect(refer)  
-
-    #for some special models (twittes? blog?) which might have comments for that model
+        #for some special models (twittes? blog?) which might have comments for that model
     # , use this to show its comment
     # get all comment model->
-    #   comments = Comment.objects.filter(content_type = [type_of_object], object_id = [pk_of_object] )
     # and then return it to template page
+    return redirect(refer)  
+
