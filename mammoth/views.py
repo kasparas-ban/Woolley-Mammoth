@@ -183,9 +183,11 @@ def share_your_pattern(request):
 
         if pattern_form.is_valid():
             if 'picture' in request.FILES:
+                pattern = Pattern()
                 pattern.picture = request.FILES['picture']
 
-            pattern.save()
+                pattern.save()
+                print("successed")
             return render(request, 'mammoth/index.html', context={'pattern_uploaded':True})
         else:
             print(pattern_form.errors)
