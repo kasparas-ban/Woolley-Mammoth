@@ -227,7 +227,7 @@ def submit_comment(request):
     comment = Comment() 
     comment.user = user
     comment.text = text
-    comment.comment_object
+    comment.comment_type = model_class
     comment.content_object = model_obj
     comment.save()
 

@@ -43,14 +43,18 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+#=================================================
+#=================Pattern model===================
+#=================================================
 class Pattern(models.Model):
     TITLE_MAX_LENGTH = 128
-
     title = models.CharField(max_length=TITLE_MAX_LENGTH)
     #slug = models.SlugField(blank=True)
     picture = models.ImageField(upload_to='pattern_images')
     #author = models.CharField(max_length=TITLE_MAX_LENGTH)
+    description = models.TextField()
 
+    owner = models.OneToOneField(User, on_delete=models.DO_NOTHING)
     def save(self, *args, **kwargs):
         #self.slug = slugify(self.title)
         super(Pattern, self).save(*args, **kwargs)
