@@ -5,7 +5,10 @@
 
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+		{% block style_block %}
+		{% endblock %}
+
         <title>
             Woolly Mammoth -
             {% block title_block %}

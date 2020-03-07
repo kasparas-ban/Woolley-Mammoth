@@ -3,6 +3,10 @@
 {% extends 'mammoth/base.html' %}
 {% load staticfiles %}
 
+{% block style_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gallery_style.css' %}" />
+{% endblock %}
+
 {% block title_block %}
     Gallery
 {% endblock %}
@@ -12,10 +16,12 @@
     <h2>Gallery</h2>
 
     {% for pattern in all_patterns %}
-        <li>
-            {{ pattern.title }}
-            <img src="{{ pattern.picture.url }}">
-        </li>
+        <div class="gallery">
+            <a target="_blank" href="{{ pattern.picture.url }}">
+                <img src="{{ pattern.picture.url }}">
+            </a>
+            <div class="desc">{{ pattern.title }}</div>
+        </div>
     {% endfor %}
 
 {% endblock %}
