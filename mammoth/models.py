@@ -60,7 +60,6 @@ class Pattern(models.Model):
     # change foreign key to OneToOneField
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -75,10 +74,13 @@ class Pattern(models.Model):
 class Comment(models.Model):
     # content_type refers to that which object does a comment belong to
     content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
-    #  object_id refers to that which object does a comment belong to
+    #  object_id refers to that the object id of a comment belong to
     object_id = models.PositiveIntegerField()
     # this means that comment will be related to any type
     content_object = GenericForeignKey('content_type','object_id') 
+    
+    # comment rated
+    comment_rate = models.IntegerField()
 
     text = models.TextField()
     comment_time = models.DateTimeField(auto_now_add=True)
@@ -87,8 +89,3 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-comment_time'] # lasted comment will be the first
 
-#=================================================
-#================= rate model=====================
-#=================================================
-class Rate(models.Model):
-    rate_score = models.FloatField()

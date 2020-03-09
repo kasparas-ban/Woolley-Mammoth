@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
+# Add Avg pack
+from django.db.models import Avg, Max, Min
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -177,12 +179,14 @@ def pattern(request, pattern_title_slug):
         pattern = Pattern.objects.get(slug=pattern_title_slug)
         # get the comment
         comments = Comment.objects.filter(object_id = pattern.pk )
+        avg_rate = comments.aggregate(Avg('comment_rate'))
 
         context_dict['pattern'] = pattern
         context_dict['comments'] = comments
+        context_dict['AvgRate'] = avg_rate['comment_rate__avg']
     except Pattern.DoesNotExist:
         context_dict['pattern'] = None
-
+        
     return render(request, 'mammoth/pattern.html', context_dict)
 
 def forum(request):
@@ -243,15 +247,24 @@ def knit_kit(request):
 def submit_comment(request):
     user = request.user
     text = request.POST.get('text','').strip() #''here means if there is nothing get from request, it will return ''
+    rate = request.POST.get('rate',0)
     content_type = request.POST.get('content_type','')
     object_id = int(request.POST.get('object_id',''))
     model_class = ContentType.objects.get(model = content_type).model_class()
     model_obj = model_class.objects.get(pk = object_id)
     
+    # if(isinstance(model_obj,'Pattern')):
+    #     pattern_obj = Pattern(model_obj)
+    #     commentList = Comment.objects.filter(object_id = pattern_obj.pk)
+
+    #     pattern.avRate =
+    #     pattern.save()
+    
     #create a comment model
     comment = Comment() 
     comment.user = user
     comment.text = text
+    comment.comment_rate = rate
     comment.comment_type = model_class
     comment.content_object = model_obj
     comment.save()
@@ -261,7 +274,7 @@ def submit_comment(request):
     refer = request.META.get("HTTP_REFERER","mammoth:index") 
         #for some special models (twittes? blog?) which might have comments for that model
     # , use this to show its comment
-    # get all comment model->
+    # get all comment model : comments = Comment.objects.filter(object_id = pattern.pk )
     # and then return it to template page
     return redirect(refer)  
 
