@@ -5,6 +5,7 @@
 
 {% block style_block %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/pattern_style.css' %}" />
+    <link rel = "stylesheet" type="text/css" href = "//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 {% endblock %}
 
 {% block title_block %}
@@ -16,13 +17,27 @@
     <h2>{{ pattern_title }}</h2>
     <div class = "pattern">
         <img src="{{ pattern.picture.url }}">
+        <!-- Used to get Average rate -->
+        <div>{{AvgRate}}</div>
     </div>
     <h3>COMMENT Submit</h3>
     <form action="{% url 'mammoth:comment' %}" method="POST">
         {% csrf_token %}
+        <x-star-bar id = "rateBar"></x-star-bar>
+        <script src="{% static 'js/starRate.js' %}"></script>
         <textarea name="text" id="" cols="30" rows="10"></textarea>
         <input type="hidden" name="object_id" value="{{pattern.pk}}">
         <input type="hidden" name="content_type" value = "pattern">
+        <input type="hidden" name="rate" value = "" id = "rateInput"> 
+        <!-- ===================Rate event Script===================== -->
+        {% comment %} the value of rate will use javascript {% endcomment %}
+        <script>
+            rateBar.addEventListener('rated',() =>{
+                rateInput.value = rateBar.value;
+                console.log(rateBar.value);
+            });
+        </script>
+        <!-- ===================Rate event Script End.....main===================== -->
         <input type="submit" value="submit">
     </form>
 
