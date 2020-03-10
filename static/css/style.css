@@ -135,7 +135,6 @@
     background-color: #c1a188;
     clear: both;
     padding-bottom: 3%;
-     margin-top: -100px;
 }
 
 .inner_footer{
@@ -216,3 +215,29 @@ input[type=submit]:hover {
 }
 
 
+.knitkitpanel{
+    float: left; 
+    text-align: center; 
+    border: 1px solid #8b450d; 
+    color: antiquewhite;
+    margin-left: 20px;
+    text-align: center;
+    background-color: #8b450d; 
+}
+
+.knitkit knitkitpanel :first-child{
+    margin-left: 0px;
+    background-color: antiquewhite;
+}
+.knitkitpanel a:link{
+    color: antiquewhite;
+    clear: both;
+    padding: 10px;
+    display: block;
+} 
+.knitkitpanel a:visited{
+    color: antiquewhite;
+} 
+.knitkitpanel a:hover{
+    color: #c1a188;
+} 

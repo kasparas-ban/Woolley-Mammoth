@@ -14,7 +14,9 @@
 {% block body_block %}
 
     <h2>Gallery</h2>
-
+<br />
+<p>Click on the patterns for comments and downloads.</p>
+<br />
     {% for pattern in all_patterns %}
         <div class="gallery">
             <a target="_blank" href="{% url 'mammoth:pattern' pattern.slug %}">
@@ -22,6 +24,7 @@
             </a>
             <div class="desc">{{ pattern.title }}</div>
         </div>
+
     {% endfor %}
 
 {% endblock %}
