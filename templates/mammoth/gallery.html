@@ -19,10 +19,10 @@
 <br />
     {% for pattern in all_patterns %}
         <div class="gallery">
+            <div class="desc">{{ pattern.title }}</div>
             <a target="_blank" href="{% url 'mammoth:pattern' pattern.slug %}">
                 <img src="{{ pattern.picture.url }}">
             </a>
-            <div class="desc">{{ pattern.title }}</div>
         </div>
 
     {% endfor %}
