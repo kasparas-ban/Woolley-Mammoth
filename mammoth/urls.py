@@ -5,13 +5,8 @@ app_name = 'mammoth'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('about/', views.about, name='about'),
-    path('category/<slug:category_name_slug>/',
-        views.show_category, name='show_category'),
-    path('add_category/', views.add_category, name='add_category'),
-    path('category/<slug:category_name_slug>/add_page/', views.add_page, name='add_page'),
-
-    path('gallery/<slug:pattern_title_slug>/', views.pattern, name='pattern'),
+    
+    path('gallery/pattern/<slug:pattern_title_slug>/', views.pattern, name='pattern'),
 
     # Registration
     path('register/', views.register, name='register'),
@@ -26,6 +21,7 @@ urlpatterns = [
     path('forum/', views.forum, name='forum'),
     path('gallery/', views.gallery, name='gallery'),
     path('share_your_pattern/', views.share_your_pattern, name='share_your_pattern'),
+    path('knit_kit/', views.knit_kit, name='knit_kit'),
     path('shop/', views.shop, name='shop'),
     
     # Footer
@@ -34,6 +30,5 @@ urlpatterns = [
     path('about_us/', views.about_us, name='about_us'),
     path('contact_us/', views.contact_us, name='contact_us'),
     path('faq/', views.faq, name='faq'),
-    path('knit_kit/', views.knit_kit, name='knit_kit'),
     
 ]

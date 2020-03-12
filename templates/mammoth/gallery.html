@@ -14,17 +14,18 @@
 {% block body_block %}
 
     <h2>Gallery</h2>
-<br />
-<p>Click on the patterns for comments and downloads.</p>
-<br />
+
+    <br />
+    <p>Click on the patterns for comments and downloads.</p>
+    <br />
+
     {% for pattern in all_patterns %}
         <div class="gallery">
             <div class="desc">{{ pattern.title }}</div>
-            <a target="_blank" href="{% url 'mammoth:pattern' pattern.slug %}">
+            <a href="{% url 'mammoth:pattern' pattern.slug %}">
                 <img src="{{ pattern.picture.url }}">
             </a>
         </div>
-
     {% endfor %}
 
 {% endblock %}
