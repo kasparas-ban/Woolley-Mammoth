@@ -3,10 +3,10 @@
     height: 200px;
     object-fit: cover;
     float: left;
+    margin-right: 20px;
 }
 
 .pattern_description{
-    margin-left: 20px;
     font-size: 16px;
 }
 x-star-bar{
@@ -16,13 +16,13 @@ x-star-bar{
     cursor: pointer;
 }
 
-x-star-bar > .star::after{
+x-star-bar > .star:after{
     content: '\f3ae';
-    color: #777;
+    color: #8b450d;
 }
-x-star-bar > .star.full::after{
+x-star-bar > .star.full:after{
     content: '\f2fc';
-    color: #fd0;
+    color:  #c1a188;
 }
 /* Average Bar */
 x-avgstar-bar{
@@ -31,13 +31,13 @@ x-avgstar-bar{
     display: inline-flex;
     cursor: pointer;
 }
-x-avgstar-bar > .star::after{
+x-avgstar-bar > .star:after{
     content: '\f3ae';
-    color: #777;
+    color: #8b450d;
 }
-x-avgstar-bar > .star.full::after{
+x-avgstar-bar > .star.full:after{
     content: '\f2fc';
-    color: #fd0;
+    color:  #c1a188;
 }
 
 /* comment Bar */
@@ -47,16 +47,17 @@ x-commentstar-bar{
     display: inline-flex;
     cursor: pointer;
 }
-x-commentstar-bar > .star::after{
+x-commentstar-bar > .star:after{
     content: '\f3ae';
-    color: #777;
+    color: #8b450d;
 }
-x-commentstar-bar > .star.full::after{
+x-commentstar-bar > .star.full:after{
     content: '\f2fc';
-    color: #fd0;
+    color:  #c1a188;
 }
 .comment_list{
     clear: both;
+    border: 2px solid gainsboro ;
 }
 .comment_submit{
     clear: both;
@@ -68,25 +69,25 @@ x-commentstar-bar > .star.full::after{
     width: 200px;
     height:200px;
     float: left;
+    padding-right: 10px;
 }
+
 .comment_content{
-    float: left;
     width: 100px;
     font-size: 18px;
-    margin-left: 5px;
-}
-.comment_date{
-    clear: both;
+    margin-left: 10px;
+    
 }
 
 .comment_block{
-    width: 80%;
-    height:350px;   
+    float: left;
+    width: 425px; 
     font-size: 18px;
-    margin-top: 10px;
+    margin-left: 20px;
     margin-bottom: 20px;
-    border: 2px solid gainsboro ;
+    border: 2px solid #8b450d;
     padding: 20px;
-    padding-bottom:1px;
+    padding-bottom:10px;
+    background-color: antiquewhite;
 }
 
