@@ -177,28 +177,24 @@ def knit_kit(request):
 #==============================================================
 def submit_comment(request):
     user = request.user
-    text = request.POST.get('text','').strip() #''here means if there is nothing get from request, it will return ''
+    text = request.POST.get('text','').strip()
     rate = request.POST.get('rate',0)
+    pattern = Pattern.objects.get(id=int(int(request.POST.get('object_id',''))))
     content_type = request.POST.get('content_type','')
     object_id = int(request.POST.get('object_id',''))
     model_class = ContentType.objects.get(model = content_type).model_class()
     model_obj = model_class.objects.get(pk = object_id)
-    
-    # if(isinstance(model_obj,'Pattern')):
-    #     pattern_obj = Pattern(model_obj)
-    #     commentList = Comment.objects.filter(object_id = pattern_obj.pk)
-
-    #     pattern.avRate
-    #     pattern.save()
-    
-    #create a comment model
-    comment = Comment() 
+    # Create a comment model
+    comment = Comment()
+    comment.pattern = pattern
     comment.user = user
     comment.text = text
+
     comment.comment_rate = rate
     comment.comment_type = model_class
     comment.content_object = model_obj
     comment.save()
+
 
     # Here: we can redirect the user to the page where they make comment
     # and if it cannot get previous page, it will redirect to mammoth:index
@@ -207,5 +203,5 @@ def submit_comment(request):
     # , use this to show its comment
     # get all comment model : comments = Comment.objects.filter(object_id = pattern.pk )
     # and then return it to template page
-    return redirect(refer)  
+    return redirect(refer)
 
