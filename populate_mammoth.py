@@ -4,10 +4,17 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from mammoth.models import Category, Page
+from mammoth.models import Category, Page, Pattern
 
 def populate():
 
+    patterns = [
+        {'title':'Cosmic Pattern', 'image':MEDIA_URL+'pattern_images/1.jpg'}
+    ]
+
+    for pattern in patterns:
+        add_pattern(pattern['title'], pattern['image'])
+    
     python_pages = [ 
         {'title':'Official Python Tutorial', 'url':'http://docs.python.org/3/tutorial/', 'views':10},
         {'title':'How to Think like a Computer Scientist', 'url':'http://www.greenteapress.com/thinkpython/', 'views':20},
@@ -48,6 +55,11 @@ def add_cat(name, views=0, likes=0):
     c.likes = likes
     c.save()
     return c
+
+def add_pattern(title, image):
+    p = Pattern.objects.get_or_create(title=title)[0]
+    p.image = image
+    return p
 
 if __name__ == '__main__':
     print('Starting Mammoth population script...')
