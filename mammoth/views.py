@@ -196,7 +196,7 @@ def submit_comment(request):
     comment = Comment() 
     comment.user = user
     comment.text = text
-    comment.rating = rate
+    comment.comment_rate = rate
     comment.comment_type = model_class
     comment.content_object = model_obj
     comment.save()
