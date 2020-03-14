@@ -1,16 +1,9 @@
 # Woolley-Mammoth
-A website for textile-based crafters and enthusiasts
+A website for textile-based crafters and enthusiasts.
 
-If you get an error the first time you try to run the server, use 
+To populate the database with data do the following steps:
 
-    python manage.py migrate
-
-Superuser account used to access the server:
-
-    username: admin
-    password: admin
-
-Regular user account:
-
-    username: username
-    password: password
+* Remove all the data from the database
+    * `python manage.py flush`
+* Run the population script
+    * `python populate_mammoth.py`

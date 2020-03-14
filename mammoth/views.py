@@ -107,13 +107,15 @@ def pattern(request, pattern_title_slug):
     context_dict = {}
     try:
         pattern = Pattern.objects.get(slug=pattern_title_slug)
-        # get the comment
-        comments = Comment.objects.filter(object_id = pattern.pk)
-        avg_rate = comments.aggregate(Avg('comment_rate'))
+        comments = Comment.objects.filter(pattern = pattern.pk)
+        avg_rating = comments.aggregate(Avg('rating'))
+
 
         context_dict['pattern'] = pattern
         context_dict['comments'] = comments
-        context_dict['AvgRate'] = avg_rate['comment_rate__avg']
+        context_dict['AvgRating'] = avg_rating['rating__avg']
+        context_dict['author'] = pattern.author
+        context_dict['description'] = pattern.description
     except Pattern.DoesNotExist:
         context_dict['pattern'] = None
         
@@ -187,14 +189,14 @@ def submit_comment(request):
     #     pattern_obj = Pattern(model_obj)
     #     commentList = Comment.objects.filter(object_id = pattern_obj.pk)
 
-    #     pattern.avRate =
+    #     pattern.avRate
     #     pattern.save()
     
     #create a comment model
     comment = Comment() 
     comment.user = user
     comment.text = text
-    comment.comment_rate = rate
+    comment.rating = rate
     comment.comment_type = model_class
     comment.content_object = model_obj
     comment.save()

@@ -37,12 +37,9 @@
        
     </div>
     
-   
-
-    <!-- Used to get Average rate -->
-    
     </br>
     <div class="comment_submit">
+
     {% if user.is_authenticated %}
         <h3>COMMENT Submit</h3>
         <form action="{% url 'mammoth:comment' %}" method="POST">
@@ -75,6 +72,7 @@
         <div class="comment_list">
             <h3>Comment List</h3>
         {% for comment in comments %}
+<!-- <<<<<<< HEAD -->
         <div class = "comment_block">
             <div>Name: {{comment.user.username}}</div>
             <div>
@@ -90,8 +88,7 @@
             
         </div>
         {% empty %}
-            <div>There is no comment</div>
-
+        <div>There is no comment</div>
         {% endfor %}
     </div>
         <!-- must put at the end of body -->

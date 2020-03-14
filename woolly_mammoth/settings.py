@@ -164,6 +164,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+PATTERN_IMAGES_URL = '/pattern_images/'
 MEDIA_ROOT = MEDIA_DIR
 STATICFILES_DIRS = [STATIC_DIR, ]
 SITE_ID = 1 
