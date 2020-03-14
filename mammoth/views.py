@@ -107,13 +107,12 @@ def pattern(request, pattern_title_slug):
     context_dict = {}
     try:
         pattern = Pattern.objects.get(slug=pattern_title_slug)
-        comments = Comment.objects.filter(pattern = pattern.pk)
-        avg_rating = comments.aggregate(Avg('rating'))
-
+        comments = Comment.objects.filter(object_id = pattern.pk)
+        avg_rating = comments.aggregate(Avg('comment_rate'))
 
         context_dict['pattern'] = pattern
         context_dict['comments'] = comments
-        context_dict['AvgRating'] = avg_rating['rating__avg']
+        context_dict['AvgRating'] = avg_rating['comment_rate__avg']
         context_dict['author'] = pattern.author
         context_dict['description'] = pattern.description
     except Pattern.DoesNotExist:
