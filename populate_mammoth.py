@@ -69,7 +69,31 @@ def populate():
 
         {'title':'Pattern 3', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_3.jpg'),
          'comments':comments, 'author':users[1], 'description':
-            "An expertly knitted pattern from yours truly."}
+            "An expertly knitted pattern from yours truly."},
+
+        {'title':'Pattern 4', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_4.jpg'),
+         'comments':comments, 'author':users[1], 'description':
+            "Beautiful pattern that anyone can knit."},
+
+        {'title':'Pattern 5', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_5.jpg'),
+         'comments':comments, 'author':users[1], 'description':
+            "A simple retro style pattern that looks good on everyone."},
+
+        {'title':'Pattern 6', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_6.jpg'),
+         'comments':comments, 'author':users[1], 'description':
+            "A three dimensional pattern for exquisite look."},
+
+        {'title':'Pattern 7', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_7.jpg'),
+         'comments':comments, 'author':users[1], 'description':
+            "A fun pattern for children."},
+
+        {'title':'Pattern 8', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_8.jpg'),
+         'comments':comments, 'author':users[1], 'description':
+            "Yet another pattern."},
+        
+        {'title':'Pattern 9', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_9.jpg'),
+         'comments':comments, 'author':users[1], 'description':
+            "Just another pattern that I knitted in my spare time."}
     ]
 
     for pattern in patterns:
