@@ -2,8 +2,13 @@
     width: 200px;
     height: 200px;
     object-fit: cover;
+    float: left;
 }
 
+.pattern_description{
+    margin-left: 20px;
+    font-size: 16px;
+}
 x-star-bar{
     font-family: "Ionicons";
     font-size: 40px;
@@ -19,3 +24,69 @@ x-star-bar > .star.full::after{
     content: '\f2fc';
     color: #fd0;
 }
+/* Average Bar */
+x-avgstar-bar{
+    font-family: "Ionicons";
+    font-size: 40px;
+    display: inline-flex;
+    cursor: pointer;
+}
+x-avgstar-bar > .star::after{
+    content: '\f3ae';
+    color: #777;
+}
+x-avgstar-bar > .star.full::after{
+    content: '\f2fc';
+    color: #fd0;
+}
+
+/* comment Bar */
+x-commentstar-bar{
+    font-family: "Ionicons";
+    font-size: 40px;
+    display: inline-flex;
+    cursor: pointer;
+}
+x-commentstar-bar > .star::after{
+    content: '\f3ae';
+    color: #777;
+}
+x-commentstar-bar > .star.full::after{
+    content: '\f2fc';
+    color: #fd0;
+}
+.comment_list{
+    clear: both;
+}
+.comment_submit{
+    clear: both;
+    margin-bottom: 20PX;
+    margin-top: 30PX;
+}
+
+.comment_image img {
+    width: 200px;
+    height:200px;
+    float: left;
+}
+.comment_content{
+    float: left;
+    width: 100px;
+    font-size: 18px;
+    margin-left: 5px;
+}
+.comment_date{
+    clear: both;
+}
+
+.comment_block{
+    width: 80%;
+    height:350px;   
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 2px solid gainsboro ;
+    padding: 20px;
+    padding-bottom:1px;
+}
+

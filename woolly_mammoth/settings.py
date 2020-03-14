@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     #provider
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.twitter',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -59,7 +60,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
-
     'django.contrib.auth.backends.ModelBackend',
 )
 # ==========================================================================
@@ -175,3 +175,18 @@ LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = '/auth/login/google-oauth2/'
 LOGOUT_REDIRECT_URL = '/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'mammoth.pipeline.get_picture', 
+    # This is the path of your pipeline.py
+    #and get_picture is the function.
+)
+

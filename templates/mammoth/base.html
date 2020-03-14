@@ -54,9 +54,7 @@
               <button style="padding: 0 15px; float: right;">
 						<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
 					</button>
-					<button style="padding: 0 15px; float: right;">
-						<a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
-					</button>
+				
                                                                            
 					<form style="padding: 0 15px; float: right;" id="login_form" method="post" action="{% url 'mammoth:login' %}">
 						{% csrf_token %}

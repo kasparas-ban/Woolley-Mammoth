@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from mammoth.models import Comment, Pattern
-from mammoth.forms import UserForm, UserProfileForm, PatternForm
+from mammoth.forms import UserForm, UserProfileForm, PatternForm, UserProfile
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
+
 # Add Avg pack
 from django.db.models import Avg, Max, Min
 
