@@ -19,8 +19,16 @@
         <img src="{{ pattern.picture.url }}">
     </div>
 
-    <!-- Used to get Average rate -->
+    <!-- Average rating -->
     <div>Average rating: {{ AvgRating }}</div>
+
+    <!-- Pattern Author -->
+    <div>{{ author }}</div>
+
+    <!-- Pattern Author -->
+    <div>{{ description }}</div>
+
+    </br>
 
     {% if user.is_authenticated %}
         <h3>COMMENT Submit</h3>
