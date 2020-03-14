@@ -101,24 +101,55 @@ def populate():
         add_pattern_and_comments(pattern['title'], pattern['picture'], pattern['description'], pattern['author'], pattern['comments'])
 
 def add_pattern_and_comments(title, picture, description, author, comments):
-    try:
-        auth = User.objects.get(username=author['username'])
-        p = Pattern.objects.get_or_create(title=title, author=auth)[0]
-        p.picture = picture
-        p.description = description
 
-        # Create comments for the pattern
-        for c in comments:
-            try:
-                comment_author = User.objects.get(username=c['user']['username'])
-                Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
-            except:
-                print("This comment already exists.")
+    auth = User.objects.get(username=author['username'])
+    p = Pattern.objects.get_or_create(title=title, author=auth)[0]
+    p.picture = picture
+    p.description = description
+
+    p.save()
+    # Create comments for the pattern
+    object_id = p.pk
+    for c in comments:
+        # small changes here if we use old comment model
+        comment_author = User.objects.get(username=c['user']['username'])
+        content_type = 'pattern'
+        model_class = ContentType.objects.get(model = content_type).model_class()
+        model_obj = model_class.objects.get(pk = object_id)
+
+        comment = Comment()
+        comment.user = comment_author
+        text=c['comment']
+        comment.text = text
+        rate=c['rating']
+        comment.comment_rate = rate
+        comment.comment_type = model_class
+        comment.content_object = model_obj
+        comment.save()
+        # new_comment = Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
+
+    # p.save()
+    return p
+
+    # try:
+    #     auth = User.objects.get(username=author['username'])
+    #     p = Pattern.objects.get_or_create(title=title, author=auth)[0]
+    #     p.picture = picture
+    #     p.description = description
+
+    #     # Create comments for the pattern
+    #     for c in comments:
+    #         try:
+    #             comment_author = User.objects.get(username=c['user']['username'])
+    #             Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
+    #         except:
+    #             print("This comment already exists.")
                 
-        p.save()
-        return p
-    except:
-        print("This pattern already exist.")
+    #     p.save()
+    #     return p
+    # except:
+    #     print("This pattern already exist.")
+
 
 def add_user(username, picture):
     try:
