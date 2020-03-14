@@ -20,7 +20,7 @@
             <form id="pattern_form" method="post" action="{% url 'mammoth:share_your_pattern' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ pattern_form.as_p }}
-                <input type="submit">
+                <input type="submit" value="Share">
             </form>
         </div>
     {% else %}
