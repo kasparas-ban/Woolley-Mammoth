@@ -20,7 +20,7 @@
     </div>
 
     <!-- Used to get Average rate -->
-    <div>{{ AvgRate }}</div>
+    <div>Average rating: {{ AvgRating }}</div>
 
     {% if user.is_authenticated %}
         <h3>COMMENT Submit</h3>
@@ -50,9 +50,10 @@
         
         {% for comment in comments %}
             <div>{{comment.user.username}}</div>
-            <div>{{comment.comment_time|date:"Y-m-d H:n:s"}}</div>
+            <div>{{comment.time|date:"Y-m-d H:n:s"}}</div>
+            <div>Rating: {{comment.rating}}</div>
             <div>{{comment.text}}</div>
-
+            </br>
 
             {% empty %}
             <div>There is no comment</div>

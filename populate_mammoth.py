@@ -1,65 +1,103 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE',
- 'woolly_mammoth.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'woolly_mammoth.settings')
 
 import django
 django.setup()
-from mammoth.models import Category, Page, Pattern
+from mammoth.models import Pattern, UserProfile, User, Comment
+from django.conf import settings
+from datetime import datetime
+import pytz
 
 def populate():
+    # === Creating users =======================================================================================
+
+    users = [
+        {'username':"MrKnitter", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'mr_knitter.jpg')},
+        {'username':"Woolly", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'woolly.jpg')},
+        {'username':"Glasgow Grandma", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'glasgow_grandma.jpg')},
+        {'username':"Sandy", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'sandy.jpg')},
+        {'username':"Nicolas", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'nicolas.jpg')},
+        {'username':"Old Hag", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'old_hag.jpg')},
+        {'username':"Your Niece", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'your_niece.jpg')},
+        {'username':"Karen", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'karen.jpg')},
+        {'username':"Cinderella", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'cinderella.jpg')}
+    ]
+
+    for u in users:
+        add_user(u['username'], u['picture'])
+
+    # === Creating patterns ======================================================================================
+
+    comments = [
+        {'user':users[0], 'rating':5, 'time':datetime(2019, 10, 3, 11, 30, 2, 0, tzinfo=pytz.UTC), 'comment':
+            "I love this patttern! I have to say, I put off knitting for a long time now, \
+            but seeing this pattern inspired me to come back to it!"},
+
+        {'user':users[1], 'rating':3, 'time':datetime(2018, 12, 4, 14, 22, 45, 0, tzinfo=pytz.UTC), 'comment':
+            "I guess it's alright."},
+
+        {'user':users[2], 'rating':2, 'time':datetime(2019, 6, 12, 20, 11, 7, 0, tzinfo=pytz.UTC), 'comment':
+            "The pattern is too basic. I've seen way better ones."},
+
+        {'user':users[3], 'rating':5, 'time':datetime(2020, 1, 3, 21, 14, 55, 0, tzinfo=pytz.UTC), 'comment':
+            "This pattern is so cool! This is exactly the kind of quality content I signed up for."},
+
+        {'user':users[4], 'rating':4, 'time':datetime(2020, 3, 14, 15, 19, 17, 0, tzinfo=pytz.UTC), 'comment':
+            "It’s my first time seeing a knitting pattern. I guess it's alright."},
+        
+        {'user':users[5], 'rating':1, 'time':datetime(2019, 9, 9, 23, 59, 59, 0, tzinfo=pytz.UTC), 'comment':
+            "Sloppy work. Get good or don't post your garbage rags."},
+
+        {'user':users[6], 'rating':5, 'time':datetime(2020, 2, 29, 6, 15, 1, 0, tzinfo=pytz.UTC), 'comment':
+            "I've never seen such a wonderful pattern in my whole life. Thank you for showing me a whole new form of fiber art."},
+
+        {'user':users[7], 'rating':2, 'time':datetime(2018, 10, 19, 10, 22, 40, 0, tzinfo=pytz.UTC), 'comment':
+            "The pattern looks too complicated. It's straining my eyes just to look at it."},
+
+        {'user':users[8], 'rating':5, 'time':datetime(2018, 7, 18, 13, 15, 1, 0, tzinfo=pytz.UTC), 'comment':
+            "What a wonderful pattern! I'd love to use it to knit socks for my cat."}
+    ]
 
     patterns = [
-        {'title':'Cosmic Pattern', 'image':MEDIA_URL+'pattern_images/1.jpg'}
+        {'title':'Pattern 1', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_1.jpg'),
+         'comments':comments, 'author':users[6], 'description':
+            "It's a quick pattern I did in my spare time."},
+
+        {'title':'Pattern 2', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_2.jpg'),
+         'comments':comments, 'author':users[2], 'description':
+            "Easy pattern that doesn't require much time to make."},
+
+        {'title':'Pattern 3', 'image':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_3.jpg'),
+         'comments':comments, 'author':users[1], 'description':
+            "An expertly knitted pattern from yours truly."}
     ]
 
     for pattern in patterns:
-        add_pattern(pattern['title'], pattern['image'])
-    
-    python_pages = [ 
-        {'title':'Official Python Tutorial', 'url':'http://docs.python.org/3/tutorial/', 'views':10},
-        {'title':'How to Think like a Computer Scientist', 'url':'http://www.greenteapress.com/thinkpython/', 'views':20},
-        {'title':'Learn Python in 10 Minutes', 'url':'http://www.korokithakis.net/tutorials/python/', 'views':30} ] 
+        add_pattern_and_comments(pattern['title'], pattern['image'], pattern['description'], pattern['author'], pattern['comments'])
 
-    django_pages = [
-        {'title':'Official Django Tutorial', 'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/', 'views':40}, 
-        {'title':'Django Rocks', 'url':'http://www.djangorocks.com/', 'views':50}, 
-        {'title':'How to Tango with Django', 'url':'http://www.tangowithdjango.com/', 'views':60} ]
+def add_pattern_and_comments(title, image, description, author, comments):
+    auth = User.objects.get(username=author['username'])
+    p = Pattern.objects.get_or_create(title=title, author=auth)[0]
+    p.picture = image
+    p.description = description
 
-    other_pages = [ 
-        {'title':'Bottle', 'url':'http://bottlepy.org/docs/dev/', 'views':70},
-        {'title':'Flask', 'url':'http://flask.pocoo.org', 'views':80} ]
-     
-    cats = {'Python': {'pages': python_pages, 'views':128, 'likes':64},
-        'Django': {'pages': django_pages, 'views':64, 'likes':32}, 
-        'Other Frameworks': {'pages': other_pages, 'views':32, 'likes':16} }
+    # Create comments for the pattern
+    for c in comments:
+        comment_author = User.objects.get(username=c['user']['username'])
+        new_comment = Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
 
-    for cat, cat_data in cats.items():
-        c = add_cat(cat, cat_data['views'], cat_data['likes'])
-        for p in cat_data['pages']:
-            add_page(c, p['title'], p['url'], p['views'])
-            
-    for c in Category.objects.all():
-        for p in Page.objects.filter(category=c):
-            print(f'- {c}: {p}')
-
-def add_page(cat, title, url, views=0): 
-    p = Page.objects.get_or_create(category=cat, title=title)[0] 
-    p.url=url
-    p.views=views
     p.save()
-    return p 
-
-def add_cat(name, views=0, likes=0):
-    c = Category.objects.get_or_create(name=name)[0]
-    c.views = views
-    c.likes = likes
-    c.save()
-    return c
-
-def add_pattern(title, image):
-    p = Pattern.objects.get_or_create(title=title)[0]
-    p.image = image
     return p
+
+def add_user(username, picture):
+    try:
+        new_user = User.objects.get_or_create(username=username, password="password")[0]
+        user_profile = UserProfile.objects.get_or_create(user=new_user, picture="")[0]
+        user_profile.picture = picture
+        user_profile.save()
+        return user_profile
+    except:
+        print("This user already exist.")
 
 if __name__ == '__main__':
     print('Starting Mammoth population script...')

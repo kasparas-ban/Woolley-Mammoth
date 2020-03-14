@@ -22,13 +22,8 @@ class Pattern(models.Model):
     title = models.CharField(max_length=TITLE_MAX_LENGTH, default='pattern_name')
     slug = models.SlugField(blank=True)
     picture = models.ImageField(upload_to='pattern_images')
-
-    #author = models.CharField(max_length=TITLE_MAX_LENGTH)
     description = models.TextField(default=" ")
-
-    # change foreign key to OneToOneField
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -41,20 +36,14 @@ class Pattern(models.Model):
 #=================comment model===================
 #=================================================
 class Comment(models.Model):
-    # content_type refers to that which object does a comment belong to
-    content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
-    #  object_id refers to that the object id of a comment belong to
-    object_id = models.PositiveIntegerField()
-    # this means that comment will be related to any type
-    content_object = GenericForeignKey('content_type','object_id') 
-    
-    # comment rated
-    comment_rate = models.IntegerField()
+    COMMENT_MAX_LENGTH = 1500
 
-    text = models.TextField()
-    comment_time = models.DateTimeField(auto_now_add=True)
-
+    pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    text = models.TextField(max_length=COMMENT_MAX_LENGTH)
+    rating = models.IntegerField()
+    time = models.DateTimeField(auto_now_add=True)
+
     class Meta:
-        ordering = ['-comment_time'] # lasted comment will be the first
+        ordering = ['-time'] # latest comment will be shown first
 
