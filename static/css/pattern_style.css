@@ -22,7 +22,7 @@ x-star-bar > .star:after{
 }
 x-star-bar > .star.full:after{
     content: '\f2fc';
-    color:  #c1a188;
+    color:  #8b450d;
 }
 /* Average Bar */
 x-avgstar-bar{
@@ -37,7 +37,7 @@ x-avgstar-bar > .star:after{
 }
 x-avgstar-bar > .star.full:after{
     content: '\f2fc';
-    color:  #c1a188;
+    color:  #8b450d;
 }
 
 /* comment Bar */
@@ -53,7 +53,7 @@ x-commentstar-bar > .star:after{
 }
 x-commentstar-bar > .star.full:after{
     content: '\f2fc';
-    color:  #c1a188;
+    color:  #8b450d;
 }
 .comment_list{
     clear: both;
