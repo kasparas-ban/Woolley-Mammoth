@@ -123,7 +123,7 @@ def add_pattern_and_comments(title, picture, description, author, comments):
         comment.text = text
         rate=c['rating']
         comment.comment_rate = rate
-        comment.comment_type = model_class
+        comment.content_type = model_class
         comment.content_object = model_obj
         comment.save()
         # new_comment = Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
