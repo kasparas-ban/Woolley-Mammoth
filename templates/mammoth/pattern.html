@@ -22,22 +22,18 @@
             <img src="{{ pattern.picture.url }}">
         </div>
         
-        <div><h2 >Average Score: {{ AvgRate | floatformat:1 }}</h2></div>
+        <h2 >Average Score: {{ AvgRate | floatformat:1 }}</h2>
         <x-avgstar-bar value="{{ AvgRate | floatformat:0}}"></x-avgstar-bar>
         <script src="{% static 'js/averageRate.js' %}"></script>
         <h2>Description</h2>
         <div class="pattern_description">{{ pattern.description }}</div>
         
-        <div style="clear: both;">
+        
             <h2>Post Author</h2>
             <span style="font-size: 18px;">{{ pattern.author.username}} </span>
-        </div>
-        
-        
-       
     </div>
     
-    </br>
+    
     <div class="comment_submit">
 
     {% if user.is_authenticated %}
@@ -62,35 +58,28 @@
             <input type="submit" value="submit">
         </form>
     {% else %}
-        <h3>COMMENT Submit</h3>
-        <p style="font-size: 20px;">If you want to subit your comment, Please Login first</p>
+        <p>Login to comment on patterns</p>
     {% endif %}
     </div>
 
     <!-- here will display the comments list for this special type / might be changed with different type of pages-->
     
-        <div class="comment_list">
-            <h3>Comment List</h3>
+
         {% for comment in comments %}
 
         <div class = "comment_block">
-            <div>Name: {{comment.user.username}}</div>
-            <div>
-                <div class = "comment_image">
-                    <img src="{{ comment.user.userprofile.picture.url }}">
-                </div>
-                <div class = "comment_content"><p>{{comment.text}}</p></div>
-            </div>
-            
-            <div class="comment_date">Time: {{comment.comment_time|date:"Y-m-d H:n:s"}}</div>
-            <div><span>Rated Score:</span> </div>
+           <p>Name: {{comment.user.username}}</p>
+            <div class="comment_image"><img src="{{ comment.user.userprofile.picture.url }}"></div>
+            <p>{{comment.text}}</p>
+            <p>Time: {{comment.comment_time|date:"Y-m-d H:n:s"}}</p>
+            <span>Rated Score:</span>
             <x-commentstar-bar value="{{comment.comment_rate}}"></x-commentstar-bar>
             
-        </div>
+        </div><!-- end of comment block-->
         {% empty %}
-        <div>There is no comment</div>
+        <p>There are no comments</p>
         {% endfor %}
-    </div>
+   
         <!-- must put at the end of body -->
         <script type="text/javascript" src="{% static 'js/commentRate.js' %}"></script>
 {% endblock %}
