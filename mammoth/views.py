@@ -109,7 +109,7 @@ def pattern(request, pattern_title_slug):
     try:
         pattern = Pattern.objects.get(slug=pattern_title_slug)
         model_class = ContentType.objects.get(model = 'pattern')
-        comments = Comment.objects.filter(Q(object_id__exact = pattern.pk) | 
+        comments = Comment.objects.filter(Q(object_id__exact = pattern.pk) & 
             Q(content_type__exact = model_class))
         avg_rating = comments.aggregate(Avg('comment_rate'))
 
@@ -186,8 +186,8 @@ def submit_comment(request):
     content_type = request.POST.get('content_type','')
     object_id = int(request.POST.get('object_id',''))
     #change String to field for content-type
-    model_class = ContentType.objects.get(model = content_type).model_class()
-    model_obj = model_class.objects.get(pk = object_id)
+    model_class = ContentType.objects.get(model = content_type)
+    model_obj = ContentType.objects.get(model = content_type).model_class().objects.get(pk = object_id)
     # Create a comment model
     comment = Comment()
     comment.pattern = pattern
