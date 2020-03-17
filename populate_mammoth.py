@@ -61,39 +61,39 @@ def populate():
 
     patterns = [
         {'title':'Pattern 1', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_1.jpg'),
-         'comments':comments, 'author':users[6], 'description':
+         'comments':comments[:3], 'author':users[6], 'description':
             "It's a quick pattern I did in my spare time."},
 
         {'title':'Pattern 2', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_2.jpg'),
-         'comments':comments, 'author':users[2], 'description':
+         'comments':comments[3:4], 'author':users[2], 'description':
             "Easy pattern that doesn't require much time to make."},
 
         {'title':'Pattern 3', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_3.jpg'),
-         'comments':comments, 'author':users[1], 'description':
+         'comments':comments[4:6], 'author':users[1], 'description':
             "An expertly knitted pattern from yours truly."},
 
-        {'title':'Pattern 4', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_4.jpg'),
+        {'title':'Pattern 4'[1:3], 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_4.jpg'),
          'comments':comments, 'author':users[1], 'description':
             "Beautiful pattern that anyone can knit."},
 
         {'title':'Pattern 5', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_5.jpg'),
-         'comments':comments, 'author':users[1], 'description':
+         'comments':comments[7], 'author':users[1], 'description':
             "A simple retro style pattern that looks good on everyone."},
 
         {'title':'Pattern 6', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_6.jpg'),
-         'comments':comments, 'author':users[1], 'description':
+         'comments':comments[8:9], 'author':users[1], 'description':
             "A three dimensional pattern for exquisite look."},
 
         {'title':'Pattern 7', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_7.jpg'),
-         'comments':comments, 'author':users[1], 'description':
+         'comments':comments[2:5], 'author':users[1], 'description':
             "A fun pattern for children."},
 
         {'title':'Pattern 8', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_8.jpg'),
-         'comments':comments, 'author':users[1], 'description':
+         'comments':comments[1:6], 'author':users[1], 'description':
             "Yet another pattern."},
         
         {'title':'Pattern 9', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_9.jpg'),
-         'comments':comments, 'author':users[1], 'description':
+         'comments':comments[6:9], 'author':users[1], 'description':
             "Just another pattern that I knitted in my spare time."}
     ]
 
@@ -107,48 +107,25 @@ def add_pattern_and_comments(title, picture, description, author, comments):
     p.picture = picture
     p.description = description
 
-    p.save()
-    # Create comments for the pattern
-    object_id = p.pk
-    for c in comments:
-        # small changes here if we use old comment model
-        comment_author = User.objects.get(username=c['user']['username'])
-        content_type = 'pattern'
-        model_class = ContentType.objects.get(model = content_type)
-        model_obj = ContentType.objects.get(model = content_type).model_class().objects.get(pk = object_id)
+    try:
+        auth = User.objects.get(username=author['username'])
+        p = Pattern.objects.get_or_create(title=title, author=auth)[0]
+        p.picture = picture
+        p.description = description
 
-        comment = Comment()
-        comment.user = comment_author
-        text=c['comment']
-        comment.text = text
-        rate=c['rating']
-        comment.comment_rate = rate
-        comment.content_type = model_class
-        comment.content_object = model_obj
-        comment.save()
-        # new_comment = Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
-
-    # p.save()
-    return p
-
-    # try:
-    #     auth = User.objects.get(username=author['username'])
-    #     p = Pattern.objects.get_or_create(title=title, author=auth)[0]
-    #     p.picture = picture
-    #     p.description = description
-
-    #     # Create comments for the pattern
-    #     for c in comments:
-    #         try:
-    #             comment_author = User.objects.get(username=c['user']['username'])
-    #             Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
-    #         except:
-    #             print("This comment already exists.")
+        # Create comments for the pattern
+        for c in comments:
+            try:
+                comment_author = User.objects.get(username=c['user']['username'])
+                new_comment = Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
+                new_comment.save()
+            except:
+                print("This comment already exists.")
                 
-    #     p.save()
-    #     return p
-    # except:
-    #     print("This pattern already exist.")
+        p.save()
+        return p
+    except:
+        print("This pattern already exist.")
 
 
 def add_user(username, picture):
@@ -157,9 +134,10 @@ def add_user(username, picture):
         user_profile = UserProfile.objects.get_or_create(user=new_user, picture="")[0]
         user_profile.picture = picture
         user_profile.save()
+        print("Added user: ", username)
         return user_profile
     except:
-        print("This user already exist.")
+        print("The user ", username," already exist.")
 
 if __name__ == '__main__':
     print('Starting Mammoth population script...')
