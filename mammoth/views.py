@@ -7,6 +7,10 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
+from django.views.generic import View
+from django.http import HttpResponse
+from .forms import ContactForm
+from django.core.mail import send_mail
 
 # Add Avg pack
 from django.db.models import Avg, Max, Min
@@ -164,13 +168,25 @@ def about_us(request):
 	return render(request, 'mammoth/about_us.html')
 	
 def contact_us(request):
-	return render(request, 'mammoth/contact_us.html')
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			sender_name = form.cleaned_data['name']
+			sender_email = form.cleaned_data['email']
+
+			message = "{0} has sent you a new message:\n\n{1}".format(sender_name, form.cleaned_data['message'])
+			send_mail('New Enquiry', message, sender_email, ['woollymammoth812@gmail.com'])
+			return HttpResponse('Thanks for contacting us!')
+	else:
+		form = ContactForm()
+		return render(request, 'mammoth/contact_us.html')
 	
 def faq(request):
 	return render(request, 'mammoth/faq.html')
 
 def knit_kit(request):
     return render(request, 'mammoth/knit_kit.html')
+
 
 #==============================================================
 #====================== Comment function ======================

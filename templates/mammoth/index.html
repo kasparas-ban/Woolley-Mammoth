@@ -65,8 +65,74 @@
 
 <br /><br />
 
-<div class="popup" onclick="myFunction()">Click me to toggle the popup!
-  <span class="popuptext" id="myPopup">Add the content for the gallery comments here</span>
+<div class="popup" onclick="myFunction()">Click me to see the comments for this pattern!
+  <span class="popuptext" id="myPopup">  <h2>{{ pattern_title }}</h2>
+    <div>
+         <!-- add something to make pattern looks better -->
+        <div class = "pattern_image">
+            <img src="{{ pattern.picture.url }}">
+        </div>
+        
+        <h2 >Average Score: {{ AvgRate | floatformat:1 }}</h2>
+        <x-avgstar-bar value="{{ AvgRate | floatformat:0}}"></x-avgstar-bar>
+        <script src="{% static 'js/averageRate.js' %}"></script>
+        <h2>Description</h2>
+        <div class="pattern_description">{{ pattern.description }}</div>
+        
+        
+            <h2>Post Author</h2>
+            <span style="font-size: 18px;">{{ pattern.author.username}} </span>
+    </div>
+    
+    
+    <div class="comment_submit">
+
+    {% if user.is_authenticated %}
+        <h3>COMMENT Submit</h3>
+        <form action="{% url 'mammoth:comment' %}" method="POST">
+            {% csrf_token %}
+            <x-star-bar id = "rateBar"></x-star-bar>
+            <script src="{% static 'js/starRate.js' %}"></script>
+            <textarea name="text" id="" cols="30" rows="10"></textarea>
+            <input type="hidden" name="object_id" value="{{pattern.pk}}">
+            <input type="hidden" name="content_type" value = "pattern">
+            <input type="hidden" name="rate" value = "0" id = "rateInput"> 
+            <!-- ===================Rate event Script===================== -->
+            {% comment %} the value of rate will use javascript {% endcomment %}
+            <script>
+                rateBar.addEventListener('rated',() =>{
+                    rateInput.value = rateBar.value;
+                    console.log(rateBar.value);
+                });
+            </script>
+            <!-- ===================Rate event Script End.....main===================== -->
+            <input type="submit" value="submit">
+        </form>
+    {% else %}
+        <p>Login to comment on patterns</p>
+    {% endif %}
+    </div>
+
+    <!-- here will display the comments list for this special type / might be changed with different type of pages-->
+    
+
+        {% for comment in comments %}
+
+        <div class = "comment_block">
+           <p>Name: {{comment.user.username}}</p>
+            <div class="comment_image"><img src="{{ comment.user.userprofile.picture.url }}"></div>
+            <p>{{comment.text}}</p>
+            <p>Time: {{comment.comment_time|date:"Y-m-d H:n:s"}}</p>
+            <span>Rated Score:</span>
+            <x-commentstar-bar value="{{comment.comment_rate}}"></x-commentstar-bar>
+            
+        </div><!-- end of comment block-->
+        {% empty %}
+        <p>There are no comments</p>
+        {% endfor %}
+   
+        <!-- must put at the end of body -->
+        <script type="text/javascript" src="{% static 'js/commentRate.js' %}"></script></span>
 </div>
 
 <script>
