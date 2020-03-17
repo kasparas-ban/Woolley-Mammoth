@@ -114,8 +114,8 @@ def add_pattern_and_comments(title, picture, description, author, comments):
         # small changes here if we use old comment model
         comment_author = User.objects.get(username=c['user']['username'])
         content_type = 'pattern'
-        model_class = ContentType.objects.get(model = content_type).model_class()
-        model_obj = model_class.objects.get(pk = object_id)
+        model_class = ContentType.objects.get(model = content_type)
+        model_obj = ContentType.objects.get(model = content_type).model_class().objects.get(pk = object_id)
 
         comment = Comment()
         comment.user = comment_author
@@ -123,7 +123,7 @@ def add_pattern_and_comments(title, picture, description, author, comments):
         comment.text = text
         rate=c['rating']
         comment.comment_rate = rate
-        comment.comment_type = model_class
+        comment.content_type = model_class
         comment.content_object = model_obj
         comment.save()
         # new_comment = Comment.objects.get_or_create(pattern=p, rating=c['rating'], text=c['comment'], time=c['time'], user=comment_author)
