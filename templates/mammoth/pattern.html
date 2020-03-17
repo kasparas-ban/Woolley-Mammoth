@@ -22,8 +22,8 @@
             <img src= "{{ pattern.picture.url }}">
         </div>
         
-        <h2 >Average Score: {{ AvgRate | floatformat:1 }}</h2>
-        <x-avgstar-bar value="{{ AvgRate | floatformat:0}}"></x-avgstar-bar>
+        <h2 >Average Score: {{ AvgRating | floatformat:1 }}</h2>
+        <x-avgstar-bar value="{{ AvgRating | floatformat:0}}"></x-avgstar-bar>
         <script src="{% static 'js/averageRate.js' %}"></script>
         <h2>Description</h2>
         <div class="pattern_description">{{ pattern.description }}</div>
@@ -44,8 +44,7 @@
             <script src="{% static 'js/starRate.js' %}"></script>
             <textarea name="text" id="" cols="30" rows="10"></textarea>
             <input type="hidden" name="object_id" value="{{pattern.pk}}">
-            <input type="hidden" name="content_type" value = "pattern">
-            <input type="hidden" name="rate" value = "0" id = "rateInput"> 
+            <input type="hidden" name="rating" value = "0" id = "rateInput"> 
             <!-- ===================Rate event Script===================== -->
             {% comment %} the value of rate will use javascript {% endcomment %}
             <script>
@@ -73,7 +72,7 @@
             <p>{{comment.text}}</p>
             <p>Time: {{comment.comment_time|date:"Y-m-d H:n:s"}}</p>
             <span>Rated Score:</span>
-            <x-commentstar-bar value="{{comment.comment_rate}}"></x-commentstar-bar>
+            <x-commentstar-bar value="{{comment.rating}}"></x-commentstar-bar>
             
         </div><!-- end of comment block-->
         {% empty %}

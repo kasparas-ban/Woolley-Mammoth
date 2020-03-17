@@ -7,7 +7,10 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
+from django.views.generic import View
+from django.http import HttpResponse
+from .forms import ContactForm
+from django.core.mail import send_mail
 
 # Add Avg pack
 from django.db.models import Avg, Max, Min
@@ -107,17 +110,15 @@ def visitor_cookie_handler(request):
 def pattern(request, pattern_title_slug):
     context_dict = {}
     try:
-        pattern = Pattern.objects.get(slug=pattern_title_slug)
-        model_class = ContentType.objects.get(model = 'pattern')
-        comments = Comment.objects.filter(Q(object_id__exact = pattern.pk) & 
-            Q(content_type__exact = model_class))
-        avg_rating = comments.aggregate(Avg('comment_rate'))
+        opened_pattern = Pattern.objects.get(slug=pattern_title_slug)
+        comments = Comment.objects.filter(pattern = opened_pattern.pk)
+        avg_rating = comments.aggregate(Avg('rating'))
 
-        context_dict['pattern'] = pattern
+        context_dict['pattern'] = opened_pattern
         context_dict['comments'] = comments
-        context_dict['AvgRate'] = avg_rating['comment_rate__avg']
-        context_dict['author'] = pattern.author
-        context_dict['description'] = pattern.description
+        context_dict['AvgRating'] = avg_rating['rating__avg']
+        context_dict['author'] = opened_pattern.author
+        context_dict['description'] = opened_pattern.description
     except Pattern.DoesNotExist:
         context_dict['pattern'] = None
         
@@ -167,7 +168,18 @@ def about_us(request):
 	return render(request, 'mammoth/about_us.html')
 	
 def contact_us(request):
-	return render(request, 'mammoth/contact_us.html')
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			sender_name = form.cleaned_data['name']
+			sender_email = form.cleaned_data['email']
+
+			message = "{0} has sent you a new message:\n\n{1}".format(sender_name, form.cleaned_data['message'])
+			send_mail('New Enquiry', message, sender_email, ['woollymammoth812@gmail.com'])
+			return HttpResponse('Thanks for contacting us!')
+	else:
+		form = ContactForm()
+		return render(request, 'mammoth/contact_us.html')
 	
 def faq(request):
 	return render(request, 'mammoth/faq.html')
@@ -175,30 +187,23 @@ def faq(request):
 def knit_kit(request):
     return render(request, 'mammoth/knit_kit.html')
 
+
 #==============================================================
 #====================== Comment function ======================
 #==============================================================
 def submit_comment(request):
     user = request.user
     text = request.POST.get('text','').strip()
-    rate = request.POST.get('rate',0)
+    rating = request.POST.get('rating', 0)
     pattern = Pattern.objects.get(id=int(int(request.POST.get('object_id',''))))
-    content_type = request.POST.get('content_type','')
-    object_id = int(request.POST.get('object_id',''))
-    #change String to field for content-type
-    model_class = ContentType.objects.get(model = content_type)
-    model_obj = ContentType.objects.get(model = content_type).model_class().objects.get(pk = object_id)
+    
     # Create a comment model
     comment = Comment()
     comment.pattern = pattern
     comment.user = user
     comment.text = text
-
-    comment.comment_rate = rate
-    comment.content_type = model_class
-    comment.content_object = model_obj
+    comment.rating = rating
     comment.save()
-
 
     # Here: we can redirect the user to the page where they make comment
     # and if it cannot get previous page, it will redirect to mammoth:index
@@ -208,4 +213,3 @@ def submit_comment(request):
     # get all comment model : comments = Comment.objects.filter(object_id = pattern.pk )
     # and then return it to template page
     return redirect(refer)
-
