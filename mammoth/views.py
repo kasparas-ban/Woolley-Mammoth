@@ -7,14 +7,10 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
-<<<<<<< HEAD
 from django.views.generic import View
 from django.http import HttpResponse
 from .forms import ContactForm
 from django.core.mail import send_mail
-=======
-from django.db.models import Q
->>>>>>> 82016d9592e4fee5387684328784e95a6f57e19d
 
 # Add Avg pack
 from django.db.models import Avg, Max, Min
@@ -115,14 +111,12 @@ def pattern(request, pattern_title_slug):
     context_dict = {}
     try:
         pattern = Pattern.objects.get(slug=pattern_title_slug)
-        model_class = ContentType.objects.get(model = 'pattern')
-        comments = Comment.objects.filter(Q(object_id__exact = pattern.pk) & 
-            Q(content_type__exact = model_class))
+        comments = Comment.objects.filter(object_id = pattern.pk)
         avg_rating = comments.aggregate(Avg('comment_rate'))
 
         context_dict['pattern'] = pattern
         context_dict['comments'] = comments
-        context_dict['AvgRate'] = avg_rating['comment_rate__avg']
+        context_dict['AvgRating'] = avg_rating['comment_rate__avg']
         context_dict['author'] = pattern.author
         context_dict['description'] = pattern.description
     except Pattern.DoesNotExist:
@@ -204,9 +198,8 @@ def submit_comment(request):
     pattern = Pattern.objects.get(id=int(int(request.POST.get('object_id',''))))
     content_type = request.POST.get('content_type','')
     object_id = int(request.POST.get('object_id',''))
-    #change String to field for content-type
-    model_class = ContentType.objects.get(model = content_type)
-    model_obj = ContentType.objects.get(model = content_type).model_class().objects.get(pk = object_id)
+    model_class = ContentType.objects.get(model = content_type).model_class()
+    model_obj = model_class.objects.get(pk = object_id)
     # Create a comment model
     comment = Comment()
     comment.pattern = pattern
@@ -214,7 +207,7 @@ def submit_comment(request):
     comment.text = text
 
     comment.comment_rate = rate
-    comment.content_type = model_class
+    comment.comment_type = model_class
     comment.content_object = model_obj
     comment.save()
 
