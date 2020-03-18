@@ -89,5 +89,6 @@ x-commentstar-bar > .star.full:after{
     padding: 20px;
     padding-bottom:10px;
     background-color: antiquewhite;
+    clear:inherit;
 }
 
