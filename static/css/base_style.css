@@ -315,7 +315,7 @@ input[type=submit]:hover {
 /* The actual popup */
 .popup .popuptext {
   visibility: hidden;
-  width: 500px;
+  width: 900px;
   background-color: #8b450d;
   color: #fff;
   text-align: center;
