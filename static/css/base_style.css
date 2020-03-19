@@ -125,7 +125,10 @@
     overflow: auto;
 }
 
-
+.img{
+   padding: 30px; 
+    float: left;
+}
 .footer{
     position:relative;
     bottom: 5px;
@@ -196,6 +199,13 @@
 .login input[type=text], select, textarea {
   width: 20%;
   padding: 0px;
+     margin: 0;
+
+}
+.login input[type=password], select, textarea {
+  width: 20%;
+  padding: 0px;
+     margin: 0;
 
 }
 
@@ -206,6 +216,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+    margin: 0;
 }
 
 
@@ -232,6 +243,28 @@ input[type=email], select, textarea {
   resize: vertical;
 }
 
+input[type=message], select, textarea {
+  width: 100%;
+    height: 200px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=password], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
 input[type=submit] {
   background-color: #8b450d;
   color: white;
@@ -239,6 +272,7 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+    margin-top: 30px;
 }
 
 input[type=submit]:hover {
@@ -312,6 +346,7 @@ input[type=submit]:hover {
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
 }
+
 
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
