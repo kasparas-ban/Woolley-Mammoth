@@ -79,6 +79,11 @@
    
 }
 
+.members{
+    display: block;
+    clear: both;
+}
+
 .navigation a:link{
     color: #8b450d;
 } 
@@ -124,6 +129,7 @@
     padding-bottom: 3%;
     overflow: auto;
 }
+
 
 .img{
    padding: 30px; 
@@ -315,7 +321,7 @@ input[type=submit]:hover {
 /* The actual popup */
 .popup .popuptext {
   visibility: hidden;
-  width: 900px;
+  width: 600px;
   background-color: #8b450d;
   color: #fff;
   text-align: center;
@@ -323,8 +329,8 @@ input[type=submit]:hover {
   padding: 8px 0;
   position: absolute;
   z-index: 1;
-  bottom: 125%;
-  left: 50%;
+ top: 50%;
+  left: 75%;
   margin-left: -80px;
 }
 

@@ -19,11 +19,10 @@
    <h2>Lets cause a hooley and get woolly!</h2><br/>
 <p>Welcome to the Woolly Mammoth website. Please have a look around. We would love for you to sign up and share your patterns with us. We welcome comments on all existing patterns and encourage people to rate them.</p>
 <br/>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    <h4>Hot Images</h4>
+
+<!-- Top 5 patterns -->
+<h4>Top 5 patterns...</h4>
 <br>
-    <div>
-		<!-- Replace this to show hot images here -->
         {% for pattern in patterns %}
         <div class="gallery">
             <div class="desc">{{ pattern.title }}</div>
@@ -32,78 +31,21 @@
             </a>
         </div>
     {% endfor %}
-    </div>
+  
 
-    <h4 style = "clear: both;">Members online</h4>
+<!--Members online-->
+<div class="members">
+    <h4>Members online...</h4>
+     <br/>
             {% for user in online_user %}
             <div class="gallery">
                 <img src="{{ user.userprofile.picture.url }}">
             </div>
             {% endfor %}
-    <div>
-        <!-- Replace this to show members online here -->
-		<!--
-        {% if pages %}
-            <ul>
-            {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <strong>There are no pages present.</strong>
-        {% endif %}
-		-->
     </div>
-	
-	<h4 style = "clear: both;">Hot Forum Discussions</h4>
-
-    <div>
-		<!-- Replace this to show hot forum discussions here -->
-		<!--
-        {% if pages %}
-            <ul>
-            {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <strong>There are no pages present.</strong>
-        {% endif %}
-		-->
-
-<br /><br />
-
-<div class="popup" onclick="myFunction()">Click me for some fun facts about woolly mammoths!
-  <span class="popuptext" id="myPopup"> 
-<p>The woolly mammoth was roughly the size of a modern African elephant.<br/>
-      
-The ears of a woolly mammoth were shorter than the modern elephant’s ears.<br/>
-      
-This was to reduce frostbite and heat loss.<br/>
-      
-A woolly mammoth's tusk contains rings, like a tree that can determine its age.<br/>
-      
-The woolly mammoth co-existed with the woolly rhinoceros, also known as the Coelodonta during the Pleistocene epoch.<br/>
-      
-The first fully documented woolly mammoth skeleton was discovered in 1799.<br/>
-      
-A woolly mammoth's coat has an undercoat of short hair and an outercoat of log foot long hairs called a guard.<br/>
-      
-The final resting place of woolly mammoths was Wrangel Island in the Arctic. <br/>
-      
-Most of the woolly mammoth population died out by 10,000 years ago.</p>
-</span>
-</div>
-
-<script>
-// When the user clicks on div, open the popup
-function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-</script>
 
 
-    </div>
+
+
 
 {% endblock %}

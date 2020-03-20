@@ -29,7 +29,7 @@
 					<a href="{% url 'mammoth:about_us' %}"><li>About Us</li></a>
             		<a href="{% url 'mammoth:gallery' %}"><li>Gallery</li></a>
             		<a href="{% url 'mammoth:contact_us' %}"><li>Contact Us</li></a>
-                    <a href="{% url 'mammoth:knit_kit' %}"><li>Knit Kit</li></a>
+                  
             		
             		{% if user.is_authenticated %}
                     <a href="{% url 'mammoth:share_your_pattern' %}"><li>Share Your Pattern</li></a>
@@ -74,8 +74,36 @@
 		<!-- Reports the status of a recently done action -->
 		{% block status_block %}
 		{% endblock %}
- <img src="{% static "images/mammoth4.png" %}" alt="Woolly Mammoth logo">
-		
+ 
+		<div class="popup" onclick="myFunction()"><img src="{% static "images/mammoth4.png" %}" alt="Woolly Mammoth logo">
+  <span class="popuptext" id="myPopup"> 
+<p>The woolly mammoth was roughly the size of a modern African elephant.<br/>
+      
+The ears of a woolly mammoth were shorter than the modern elephant’s ears.<br/>
+      
+This was to reduce frostbite and heat loss.<br/>
+      
+A woolly mammoth's tusk contains rings, like a tree that can determine its age.<br/>
+      
+The woolly mammoth co-existed with the woolly rhinoceros, also known as the Coelodonta during the Pleistocene epoch.<br/>
+      
+The first fully documented woolly mammoth skeleton was discovered in 1799.<br/>
+      
+A woolly mammoth's coat has an undercoat of short hair and an outercoat of log foot long hairs called a guard.<br/>
+      
+The final resting place of woolly mammoths was Wrangel Island in the Arctic. <br/>
+      
+Most of the woolly mammoth population died out by 10,000 years ago.</p>
+</span>
+</div>
+
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
 	
         <div class="main">
           
@@ -91,7 +119,7 @@
             <div class="inner_footer">
         <div class="navigation">
             <ul>
-				<a href="{% url 'mammoth:terms_and_conditions' %}"><li>Terms & Conditions</li></a>
+				  <a href="{% url 'mammoth:knit_kit' %}"><li>Knit Kit</li></a>
 				<a href="{% url 'mammoth:site_map' %}"><li>Site Map</li></a>
 				<a href="{% url 'mammoth:faq' %}"><li>FAQ</li></a>
             </ul>
