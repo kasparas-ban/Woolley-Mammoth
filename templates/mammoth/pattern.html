@@ -70,7 +70,7 @@
            <p>Name: {{comment.user.username}}</p>
             <div class="comment_image"><img src="{{ comment.user.userprofile.picture.url }}"></div>
             <p>{{comment.text}}</p>
-            <p>Time: {{comment.comment_time|date:"Y-m-d H:n:s"}}</p>
+            <p>Time: {{comment.time|date:"Y-m-d H:n:s"}}</p>
             <span>Rated Score:</span>
             <x-commentstar-bar value="{{comment.rating}}"></x-commentstar-bar>
             

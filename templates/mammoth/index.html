@@ -1,6 +1,10 @@
 {% extends 'mammoth/base.html' %}
 {% load staticfiles %}
 
+{% block style_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gallery_style.css' %}" />
+{% endblock %}
+
 {% block title_block %}
     Homepage
 {% endblock %}
@@ -17,26 +21,27 @@
 <br/>
 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     <h4>Hot Images</h4>
-
+<br>
     <div>
 		<!-- Replace this to show hot images here -->
-		<!--
-        {% if categories %}
-            <ul>
-            {% for category in categories %}
-                <li><a href="{% url 'mammoth:show_category' category.slug %}">{{ category.name }}</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <strong>There are no categories present.</strong>
-        {% endif %}
-		-->
+        {% for pattern in patterns %}
+        <div class="gallery">
+            <div class="desc">{{ pattern.title }}</div>
+            <a href="{% url 'mammoth:pattern' pattern.slug %}">
+                <img src="{{ pattern.picture.url }}">
+            </a>
+        </div>
+    {% endfor %}
     </div>
 
-    <h4>Members online</h4>
-
+    <h4 style = "clear: both;">Members online</h4>
+            {% for user in online_user %}
+            <div class="gallery">
+                <img src="{{ user.userprofile.picture.url }}">
+            </div>
+            {% endfor %}
     <div>
-		<!-- Replace this to show members online here -->
+        <!-- Replace this to show members online here -->
 		<!--
         {% if pages %}
             <ul>
@@ -50,7 +55,7 @@
 		-->
     </div>
 	
-	<h4>Hot Forum Discussions</h4>
+	<h4 style = "clear: both;">Hot Forum Discussions</h4>
 
     <div>
 		<!-- Replace this to show hot forum discussions here -->

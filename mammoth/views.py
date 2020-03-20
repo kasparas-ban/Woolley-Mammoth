@@ -11,14 +11,26 @@ from django.views.generic import View
 from django.http import HttpResponse
 from .forms import ContactForm
 from django.core.mail import send_mail
+from django.contrib.sessions.models import Session
 
 # Add Avg pack
 from django.db.models import Avg, Max, Min
 
 def index(request):
     visitor_cookie_handler(request)
-
-    response = render(request, 'mammoth/index.html', context={})
+    # This will give top 5 pattern
+    comments = Comment.objects.values('pattern').order_by('pattern').annotate(Avg('rating')).order_by('rating__avg')[:5]
+    patterns = Pattern.objects.filter(pk__in = [comments[0]['pattern'],comments[1]['pattern'],comments[2]['pattern'],comments[3]['pattern'],comments[4]['pattern']])
+    # get online user count
+    sessions = Session.objects.filter(expire_date__gte=datetime.now())
+    uid_list = []
+    for session in sessions:
+        data = session.get_decoded()
+        uid_list.append(data.get('_auth_user_id', None))
+    context={"patterns":patterns,
+             "online_user":uid_list,                
+            }
+    response = render(request, 'mammoth/index.html',context)
     return response
 
 def register(request):
