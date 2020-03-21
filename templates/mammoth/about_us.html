@@ -17,10 +17,8 @@
  <img  width = 140px height=140px src="{% static "images/Ken.png" %}" alt="Pic of Ken">
 <br />
     <br />
-   <p> We decided to put this site together so we could form a larger wool loving herd, which currently consists of over 200 members. This has allowed us to share a vast number of lovely woolly patterns with you all. </p>
+   <p> We decided to put this site together so we could form a larger wool loving herd, which currently consists of {{ users | length}} members. This has allowed us to share a vast number of lovely woolly patterns with you all. </p>
     <br />
 <p>We showcase the top 5 patterns on our index page, all other patterns can be found via our gallery. Patterns and membership are free, it's all for the love of wool. Lets cause a hooley! </p>
-    <br />
-    <p>The members we have: {{ users | length}} </p>
 
 {% endblock %}
