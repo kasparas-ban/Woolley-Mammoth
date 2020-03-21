@@ -46,3 +46,4 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-time'] # latest comment will be shown first
+

@@ -12,6 +12,8 @@ from django.http import HttpResponse
 from .forms import ContactForm
 from django.core.mail import send_mail
 from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Add Avg pack
 from django.db.models import Avg, Max, Min
@@ -19,16 +21,20 @@ from django.db.models import Avg, Max, Min
 def index(request):
     visitor_cookie_handler(request)
     # This will give top 5 pattern
-    comments = Comment.objects.values('pattern').order_by('pattern').annotate(Avg('rating')).order_by('rating__avg')[:5]
-    patterns = Pattern.objects.filter(pk__in = [comments[0]['pattern'],comments[1]['pattern'],comments[2]['pattern'],comments[3]['pattern'],comments[4]['pattern']])
+    comments = Comment.objects.values('pattern').order_by('pattern').annotate(Avg('rating')).order_by('-rating__avg')[0:5]
+    # patterns = Pattern.objects.filter(pk__in = [comments[0]['pattern'],comments[1]['pattern'],comments[2]['pattern'],comments[3]['pattern'],comments[4]['pattern']])
+    pattern1 = Pattern.objects.get(pk = comments[0]['pattern'])
+    pattern2 = Pattern.objects.get(pk = comments[1]['pattern'])
+    pattern3 = Pattern.objects.get(pk = comments[2]['pattern'])
+    pattern4 = Pattern.objects.get(pk = comments[3]['pattern'])
+    pattern5 = Pattern.objects.get(pk = comments[4]['pattern'])
+    # put them in the order we want
+    patterns = [pattern1,pattern2,pattern3,pattern4,pattern5]
     # get online user count
-    sessions = Session.objects.filter(expire_date__gte=datetime.now())
-    uid_list = []
-    for session in sessions:
-        data = session.get_decoded()
-        uid_list.append(data.get('_auth_user_id', None))
+
+    online_users = get_current_users()
     context={"patterns":patterns,
-             "online_user":uid_list,                
+             "online_user":online_users,                
             }
     response = render(request, 'mammoth/index.html',context)
     return response
@@ -225,3 +231,13 @@ def submit_comment(request):
     # get all comment model : comments = Comment.objects.filter(object_id = pattern.pk )
     # and then return it to template page
     return redirect(refer)
+
+# get current users
+def get_current_users():
+    active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    user_id_list = []
+    for session in active_sessions:
+        data = session.get_decoded()
+        user_id_list.append(data.get('_auth_user_id', None))
+    # Query all logged in users based on id list
+    return User.objects.filter(id__in=user_id_list)

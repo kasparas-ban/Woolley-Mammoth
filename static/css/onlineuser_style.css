@@ -1,0 +1,12 @@
+.online{
+    display: inline-block;
+}
+.online img{
+    display: inline-block;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+}
+.online_user_name{
+    text-align: center;
+}

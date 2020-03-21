@@ -3,6 +3,7 @@
 
 {% block style_block %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/gallery_style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/onlineuser_style.css' %}" />
 {% endblock %}
 
 {% block title_block %}
@@ -38,8 +39,9 @@
     <h4>Members online...</h4>
      <br/>
             {% for user in online_user %}
-            <div class="gallery">
+            <div class= "online">
                 <img src="{{ user.userprofile.picture.url }}">
+                <div class="online_user_name"><span>{{ user.username }}</span></div>
             </div>
             {% endfor %}
     </div>
