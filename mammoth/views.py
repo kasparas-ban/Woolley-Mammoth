@@ -183,8 +183,10 @@ def site_map(request):
 	return render(request, 'mammoth/site_map.html')
 	
 def about_us(request):
-	return render(request, 'mammoth/about_us.html')
-	
+    users = User.objects.all()
+    context = {"users":users}
+    return render(request, 'mammoth/about_us.html',context)
+
 def contact_us(request):
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
