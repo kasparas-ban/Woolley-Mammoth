@@ -13,15 +13,15 @@ def populate():
     # === Creating users =======================================================================================
 
     users = [
-        {'username':"MrKnitter", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'mr_knitter.jpg')},
-        {'username':"Woolly", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'woolly.jpg')},
-        {'username':"Glasgow Grandma", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'glasgow_grandma.jpg')},
-        {'username':"Sandy", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'sandy.jpg')},
-        {'username':"Nicolas", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'nicolas.jpg')},
-        {'username':"Old Hag", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'old_hag.jpg')},
-        {'username':"Your Niece", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'your_niece.jpg')},
-        {'username':"Karen", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'karen.jpg')},
-        {'username':"Cinderella", 'picture':os.path.join(settings.BASE_DIR, 'media', 'profile_images', 'cinderella.jpg')}
+        {'username':"MrKnitter", 'picture':os.path.join('profile_images', 'mr_knitter.jpg')},
+        {'username':"Woolly", 'picture':os.path.join('profile_images', 'woolly.jpg')},
+        {'username':"Glasgow Grandma", 'picture':os.path.join('profile_images', 'glasgow_grandma.jpg')},
+        {'username':"Sandy", 'picture':os.path.join('profile_images', 'sandy.jpg')},
+        {'username':"Nicolas", 'picture':os.path.join('profile_images', 'nicolas.jpg')},
+        {'username':"Old Hag", 'picture':os.path.join('profile_images', 'old_hag.jpg')},
+        {'username':"Your Niece", 'picture':os.path.join('profile_images', 'your_niece.jpg')},
+        {'username':"Karen", 'picture':os.path.join('profile_images', 'karen.jpg')},
+        {'username':"Cinderella", 'picture':os.path.join('profile_images', 'cinderella.jpg')}
     ]
 
     for u in users:
@@ -60,39 +60,39 @@ def populate():
     ]
 
     patterns = [
-        {'title':'Pattern 1', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_1.jpg'),
+        {'title':'Pattern 1', 'picture':os.path.join('pattern_images', 'pattern_1.jpg'),
          'comments':comments[:3], 'author':users[6], 'description':
             "It's a quick pattern I did in my spare time."},
 
-        {'title':'Pattern 2', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_2.jpg'),
+        {'title':'Pattern 2', 'picture':os.path.join('pattern_images', 'pattern_2.jpg'),
          'comments':comments[3:4], 'author':users[2], 'description':
             "Easy pattern that doesn't require much time to make."},
 
-        {'title':'Pattern 3', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_3.jpg'),
+        {'title':'Pattern 3', 'picture':os.path.join('pattern_images', 'pattern_3.jpg'),
          'comments':comments[4:6], 'author':users[1], 'description':
             "An expertly knitted pattern from yours truly."},
 
-        {'title':'Pattern 4'[1:3], 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_4.jpg'),
+        {'title':'Pattern 4'[1:3], 'picture':os.path.join('pattern_images', 'pattern_4.jpg'),
          'comments':comments, 'author':users[1], 'description':
             "Beautiful pattern that anyone can knit."},
 
-        {'title':'Pattern 5', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_5.jpg'),
+        {'title':'Pattern 5', 'picture':os.path.join('pattern_images', 'pattern_5.jpg'),
          'comments':comments[7], 'author':users[1], 'description':
             "A simple retro style pattern that looks good on everyone."},
 
-        {'title':'Pattern 6', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_6.jpg'),
+        {'title':'Pattern 6', 'picture':os.path.join('pattern_images', 'pattern_6.jpg'),
          'comments':comments[8:9], 'author':users[1], 'description':
             "A three dimensional pattern for exquisite look."},
 
-        {'title':'Pattern 7', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_7.jpg'),
+        {'title':'Pattern 7', 'picture':os.path.join('pattern_images', 'pattern_7.jpg'),
          'comments':comments[2:5], 'author':users[1], 'description':
             "A fun pattern for children."},
 
-        {'title':'Pattern 8', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_8.jpg'),
+        {'title':'Pattern 8', 'picture':os.path.join('pattern_images', 'pattern_8.jpg'),
          'comments':comments[1:6], 'author':users[1], 'description':
             "Yet another pattern."},
         
-        {'title':'Pattern 9', 'picture':os.path.join(settings.BASE_DIR, 'media', 'pattern_images', 'pattern_9.jpg'),
+        {'title':'Pattern 9', 'picture':os.path.join('pattern_images', 'pattern_9.jpg'),
          'comments':comments[6:9], 'author':users[1], 'description':
             "Just another pattern that I knitted in my spare time."}
     ]

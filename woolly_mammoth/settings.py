@@ -29,7 +29,7 @@ SECRET_KEY = 'w0_engsle_$55h@vuv1l&!fkif^1&5kmd-uje_mow-4)r%**g('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = 'mammoth:login'
 
@@ -165,9 +165,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 PATTERN_IMAGES_URL = '/pattern_images/'
-MEDIA_ROOT = MEDIA_DIR
+
 STATICFILES_DIRS = [STATIC_DIR, ]
 SITE_ID = 1 
 
