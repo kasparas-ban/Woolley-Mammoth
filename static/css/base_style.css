@@ -1,3 +1,5 @@
+/*Main styling for the site*/
+
 *{
     margin: 0;
     padding: 0;
@@ -157,6 +159,7 @@
     color: #8b450d;
 }
 
+/*accordion on the FAQ page*/
 
 .accordion {
   background-color:antiquewhite;
@@ -193,7 +196,7 @@
 }
 
 .panel {
-    content: close-quote;
+  content: close-quote;
   padding: 0 18px;
   display: none;
   background-color: white;
@@ -201,6 +204,7 @@
    
 }
 
+/*style for the various input fields*/
 
 .login input[type=text], select, textarea {
   width: 20%;
@@ -351,16 +355,4 @@ input[type=submit]:hover {
   visibility: visible;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
-}
-
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
 }
